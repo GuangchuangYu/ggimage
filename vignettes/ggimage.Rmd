@@ -1,0 +1,54 @@
+---
+title: "ggimage introduction"
+author: "Guangchuang Yu\\
+
+        School of Public Health, The University of Hong Kong"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    toc: true
+    theme: cayman
+    highlight: github
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{ggimage introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r style, echo=FALSE, results="asis", message=FALSE}
+knitr::opts_chunk$set(tidy = FALSE,
+		   message = FALSE)
+```
+
+
+```{r echo=FALSE, results="hide", message=FALSE}
+library("ggplot2")
+library("ggimage")
+```
+
+
+# Examples
+
+```{r warning=FALSE}
+library("ggplot2")
+library("ggimage")
+
+set.seed(2017-02-21)
+d <- data.frame(x = rnorm(10),
+                y = rnorm(10),
+                image = sample(c("https://www.r-project.org/logo/Rlogo.png",
+                                 "https://jeroenooms.github.io/images/frink.png"),
+                               size=10, replace = TRUE)
+                )
+
+ggplot(d, aes(x, y)) + geom_image(aes(image=image), size=.05)
+ggplot(d, aes(x, y)) + geom_image(aes(image=image), size=.05, by='height')
+
+ggplot(d, aes(x, y)) + geom_image(image=d$image[1])
+d$size=seq(.05, .15, length.out=10)
+ggplot(d, aes(x, y)) + geom_image(aes(image=image, size=I(size)))
+```
+
+
