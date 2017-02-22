@@ -50,7 +50,7 @@ devtools::install_github("GuangchuangYu/ggimage")
 
 <sup>&</sup> a geom layer supports adding multiple (copy/different) images simultaneously.
 
-<sup>^</sup> without `aes` mapping, a layer can only add multiple copy of **a** image at different positions. While with `aes`, one can map a categorical variable to different images and adding them to a layer.
+<sup>^</sup> without `aes` mapping, a layer can only add multiple copy of **a** image at different positions. While with `aes`, one can map a categorical variable to **different** images and adding them to a layer.
 
 ## Examples
 
