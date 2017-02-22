@@ -22,12 +22,15 @@ School of Public Health, The University of Hong Kong
 Get the released version from CRAN:
 
 ```r
+## include BioC repo for dependencies
+setRepositories(ind=1:2) 
 install.packages("ggimage")
 ```
 
 Or the development version from github:
 
 ```r
+setRepositories(ind=1:2)
 ## install.packages("devtools")
 devtools::install_github("GuangchuangYu/ggimage")
 ```
@@ -47,10 +50,11 @@ devtools::install_github("GuangchuangYu/ggimage")
 
 <sup>&</sup> a geom layer supports adding multiple (copy/different) images simultaneously.
 
-<sup>^</sup> without `aes` mapping, a layer can only add multiple copy of **a** image at different positions. While with `aes`, one can map a categorical variable to different images and adding it to a layer.
+<sup>^</sup> without `aes` mapping, a layer can only add multiple copy of **a** image at different positions. While with `aes`, one can map a categorical variable to different images and adding them to a layer.
 
 
 ## TODO
 
++ legend of images (`draw_key_image` function)
 + move `ggtree::subview` to `ggimage`.
 + reimplement `ggtree::phylopic` function to `geom_phylopic` layer.
