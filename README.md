@@ -13,7 +13,7 @@ Supports aesthetic mapping of image files to be visualized in 'ggplot2' graphic 
 
 ## Authors
 
-Guangchuang YU <http://guangchuangyu.github.io>
+Guangchuang YU <https://guangchuangyu.github.io>
 
 School of Public Health, The University of Hong Kong
 
@@ -52,6 +52,61 @@ devtools::install_github("GuangchuangYu/ggimage")
 
 <sup>^</sup> without `aes` mapping, a layer can only add multiple copy of **a** image at different positions. While with `aes`, one can map a categorical variable to different images and adding them to a layer.
 
+## Examples
+
+**ggimage** provides general solution for using images in 'ggplot2. It's easy to reproduce examples of other packages that designed for specific need.
+
+### CatterPlots 
+
+```r
+library(ggplot2)
+library(ggimage)
+
+mytheme <- theme_minimal() +
+    theme(axis.title=element_blank())
+theme_set(mytheme)
+
+x <- seq(-2*pi, 2*pi, length.out=30)
+d <- data.frame(x=x, y=sin(x))
+
+img <- "http://www.belleamibengals.com/bengal_cat_2.png"
+ggplot(d, aes(x, y)) + geom_image(image=img, size=.1)
+```
+
+![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_CatterPlots.png)
+
+
+### rphylopic
+
+```r
+img <- "http://phylopic.org/assets/images/submissions/500bd7c6-71c1-4b86-8e54-55f72ad1beca.128.png"
+ggplot(d, aes(x, y)) + geom_image(image=img, size=.1)
+```
+
+![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_rphylopic.png)
+
+### emoGG
+
+```r
+emoji <- "https://twemoji.maxcdn.com/72x72/1f63b.png"
+ggplot(d, aes(x, y)) + geom_image(image=emoji)
+```
+
+![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_emoGG.png)
+
+### ggflags
+
+```r
+cn <- "https://behdad.github.io/region-flags/png/CN.png"
+fr <- "https://behdad.github.io/region-flags/png/FR.png"
+us <- "https://behdad.github.io/region-flags/png/US.png"
+
+set.seed(123)
+d$image <- sample(c(cn, fr, us), size=nrow(d), replace=TRUE)
+ggplot(d, aes(x, y)) + geom_image(aes(image=image))
+```
+
+![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_ggflags.png)
 
 ## TODO
 
