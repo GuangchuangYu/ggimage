@@ -34,16 +34,16 @@ devtools::install_github("GuangchuangYu/ggimage")
 
 ## Related Packages
 
-| package                                                                              | purpose                                        |base plot| ggplot2| geom layer<sup>&</sup>| aes mapping<sup>^</sup>|
-| -------------------------------------------------------------------------| ------------------------------------------ | ---------- |---------- |--------------- | ----------------- |
-| [CatterPlots](https://github.com/Gibbsdavidl/CatterPlots)| cats                                               | Y           |             |                    |                       |
-| [rphylopic](https://github.com/sckott/rphylopic)               | phylopic                                        | Y           | Y          | Y & N<sup>*</sup>   |                       |
-| [emoGG](https://github.com/dill/emoGG)                         | emoji                                             |             | Y          | Y                 |                       |
-| [ggflags](https://github.com/baptiste/ggflags)                  | flags                                              |             | Y           | Y                 | Y                    |
-| [ggimage](https://github.com/GuangchuangYu/ggimage)| **general**, all kinds of images|             | Y           | Y                 | Y                    |
+| package                                                  |purpose                       |base plot| ggplot2| geom layer<sup>&</sup>| aes mapping<sup>^</sup>|
+| ---------------------------------------------------------| ------- | ------ |---------- |--------------- | ----------------- |
+| [CatterPlots](https://github.com/Gibbsdavidl/CatterPlots)| cats                         | Y           |             |                    |                       |
+| [rphylopic](https://github.com/sckott/rphylopic)         | phylopic                      | Y           | Y          | Y & N<sup>*</sup>   |                       |
+| [emoGG](https://github.com/dill/emoGG)                   | emoji                         |             | Y          | Y                 |                       |
+| [ggflags](https://github.com/baptiste/ggflags)           | flags                          |             | Y           | Y                 | Y          |
+| [ggimage](https://github.com/GuangchuangYu/ggimage)      |**general**, all kinds of images|             | Y           | Y                 | Y                    |
 
 
-<sup>*</sup> `rphylopic` supports using `p+add_phylopic()` to add **1** image each time since it internally use `annotation_custom`.
+<sup>\*</sup> `rphylopic` supports using `p+add_phylopic()` to add **1** image each time since it internally use `annotation_custom`.
 
 <sup>&</sup> a geom layer supports adding multiple (copy/different) images simultaneously.
 
