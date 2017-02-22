@@ -54,7 +54,7 @@ devtools::install_github("GuangchuangYu/ggimage")
 
 ## Examples
 
-**ggimage** provides general solution for using images in 'ggplot2. It's easy to reproduce examples of other packages that designed for specific need.
+**ggimage** provides general solution for using images in *ggplot2*. It's easy to reproduce examples of other packages that designed for specific need.
 
 ### CatterPlots 
 
