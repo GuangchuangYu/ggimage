@@ -52,3 +52,4 @@ ggplot(d, aes(x, y)) + geom_image(aes(image=image, size=I(size)))
 ```
 
 
+

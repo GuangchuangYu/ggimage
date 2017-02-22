@@ -1,0 +1,7 @@
+CHANGES IN VERSION 0.0.2
+------------------------
+ o remove parsing `image` parameter via `...`, and set image="https://www.r-project.org/logo/Rlogo.png" by default <2017-02-22, Wed>
+
+CHANGES IN VERSION 0.0.1
+------------------------
+ o geom_image layer <2017-02-21, Tue>

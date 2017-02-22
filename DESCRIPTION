@@ -1,6 +1,6 @@
 Package: ggimage
 Title: Use Image in 'ggplot2'
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre"))
 Description: Supports aesthetic mapping of image files to be visualized in 'ggplot2' graphic system.
 Depends:
@@ -9,7 +9,8 @@ Imports:
     EBImage,
     ggplot2,
     grid,
-    methods
+    methods,
+    scales
 Suggests:
     knitr,
     prettydoc
