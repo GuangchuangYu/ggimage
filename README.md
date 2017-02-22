@@ -73,7 +73,7 @@ img <- "http://www.belleamibengals.com/bengal_cat_2.png"
 ggplot(d, aes(x, y)) + geom_image(image=img, size=.1)
 ```
 
-![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_CatterPlots.png)
+<img src="https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_CatterPlots.png", width="600">
 
 
 ### rphylopic
@@ -83,7 +83,7 @@ img <- "http://phylopic.org/assets/images/submissions/500bd7c6-71c1-4b86-8e54-55
 ggplot(d, aes(x, y)) + geom_image(image=img, size=.1)
 ```
 
-![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_rphylopic.png)
+<img src="https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_rphylopic.png", width="600">
 
 ### emoGG
 
@@ -92,7 +92,7 @@ emoji <- "https://twemoji.maxcdn.com/72x72/1f63b.png"
 ggplot(d, aes(x, y)) + geom_image(image=emoji)
 ```
 
-![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_emoGG.png)
+<img src="https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_emoGG.png", width="600">
 
 ### ggflags
 
@@ -106,7 +106,7 @@ d$image <- sample(c(cn, fr, us), size=nrow(d), replace=TRUE)
 ggplot(d, aes(x, y)) + geom_image(aes(image=image))
 ```
 
-![](https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_ggflags.png)
+<img src="https://guangchuangyu.github.io/blog_images/R/ggimage/ggimage_ggflags.png", width="600">
 
 ## TODO
 
