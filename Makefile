@@ -12,6 +12,9 @@ rd:
 readme:
 	Rscript -e 'rmarkdown::render("README.Rmd")'
 
+readme2:
+	Rscript -e 'rmarkdown::render("README.Rmd", "html_document")'
+
 build:
 	cd ..;\
 	R CMD build $(PKGSRC)
