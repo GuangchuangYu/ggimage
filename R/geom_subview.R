@@ -9,9 +9,9 @@
 ##' @param height height
 ##' @return layer
 ##' @importFrom ggplot2 annotation_custom
-##' @importFrom grid convertUnit
-##' @importFrom grid viewport
-##' @importFrom grid pushViewport
+## @importFrom grid convertUnit
+## @importFrom grid viewport
+## @importFrom grid pushViewport
 ##' @importFrom tibble data_frame
 ##' @export
 ##' @author guangchuang yu
@@ -30,30 +30,29 @@ geom_subview <- function(subview, x, y, width=.1, height=.1) {
                     width=width,
                     height=height,
                     subview=subview)
+    d$xmin <- d$x - d$width/2
+    d$xmax <- d$x + d$width/2
+    d$ymin <- d$y - d$height/2
+    d$ymax <- d$y + d$height/2
 
     lapply(1:nrow(d), function(i) {
-        x <- d$x[i]
-        y <- d$y[i]
-        width <- d$width[i]
-        height <- d$height[i]
+        ## x <- d$x[i]
+        ## y <- d$y[i]
+        ## width <- d$width[i]
+        ## height <- d$height[i]
 
-        pushViewport(viewport())
+        ## pushViewport(viewport())
         ## xmin <- convertUnit(unit(x, "native") - unit(width/2, "npc"), "native")
         ## xmax <- convertUnit(unit(x, "native") + unit(width/2, "npc"), "native")
         ## ymin <- convertUnit(unit(y, "native") - unit(height/2, "npc"), "native")
         ## ymax <- convertUnit(unit(y, "native") + unit(height/2, "npc"), "native")
-        xmin <- convertUnit(unit(x, "native") - unit(width/2, "native"), "native")
-        xmax <- convertUnit(unit(x, "native") + unit(width/2, "native"), "native")
-        ymin <- convertUnit(unit(y, "native") - unit(height/2, "native"), "native")
-        ymax <- convertUnit(unit(y, "native") + unit(height/2, "native"), "native")
-
 
         annotation_custom(
             toGrob(d$subview[[i]]),
-            xmin = xmin,
-            xmax = xmax,
-            ymin = ymin,
-            ymax = ymax)
+            xmin = d$xmin[i],
+            xmax = d$xmax[i],
+            ymin = d$ymin[i],
+            ymax = d$ymax[i])
     })
 }
 
