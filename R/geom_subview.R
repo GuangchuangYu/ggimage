@@ -9,8 +9,6 @@
 ##' @param height height
 ##' @return layer
 ##' @importFrom ggplot2 annotation_custom
-##' @importFrom gridGraphics grid.echo
-##' @importFrom grid grid.grab
 ##' @importFrom grid convertUnit
 ##' @importFrom grid viewport
 ##' @importFrom grid pushViewport
@@ -26,35 +24,27 @@ geom_subview <- function(subview, x, y, width=.1, height=.1) {
     if (!inherits(subview, "list")) {
         subview <- list(subview)
     }
+
     d <- data_frame(x=x, y=y,
                     width=width,
                     height=height,
                     subview=subview)
+
     lapply(1:nrow(d), function(i) {
         x <- d$x[i]
         y <- d$y[i]
         width <- d$width[i]
         height <- d$height[i]
-        subview <- d$subview[[i]]
-
-        if (inherits(subview, "expression")) {
-            tmp <- eval(subview) ## base plot may return value via `invisible()`
-            if (is.null(tmp) || is.null(toGrob(tmp))) {
-                grid.echo()
-                subview <- grid.grab()
-            }
-        }
-
-        sv <- toGrob(subview)
+        subview <- toGrob(d$subview[[i]])
 
         pushViewport(viewport())
         xmin <- convertUnit(unit(x, "native") - unit(width/2, "npc"), "native")
         xmax <- convertUnit(unit(x, "native") + unit(width/2, "npc"), "native")
-
         ymin <- convertUnit(unit(x, "native") - unit(height/2, "npc"), "native")
         ymax <- convertUnit(unit(x, "native") + unit(height/2, "npc"), "native")
+
         annotation_custom(
-            sv,
+            subview,
             xmin = xmin,
             xmax = xmax,
             ymin = ymin,
@@ -62,8 +52,22 @@ geom_subview <- function(subview, x, y, width=.1, height=.1) {
     })
 }
 
-##' @importFrom ggplot2 ggplotGrob
+##' @importFrom gridGraphics grid.echo
+##' @importFrom grid grid.grab
 toGrob <- function(subview) {
+    if (inherits(subview, "expression")) {
+        tmp <- eval(subview) ## base plot may return value via `invisible()`
+        if (is.null(tmp) || is.null(toGrob_(tmp))) {
+            grid.echo()
+            subview <- grid.grab()
+        }
+    }
+    toGrob_(subview)
+}
+
+
+##' @importFrom ggplot2 ggplotGrob
+toGrob_ <- function(subview) {
     if (inherits(subview, "ggplot")) {
         sv <- ggplotGrob(subview)
     } else if (inherits(subview, "trellis")) {
