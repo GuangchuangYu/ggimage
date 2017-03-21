@@ -13,6 +13,7 @@
 ##' @importFrom grid viewport
 ##' @importFrom grid pushViewport
 ##' @importFrom tibble data_frame
+##' @export
 ##' @author guangchuang yu
 geom_subview <- function(subview, x, y, width=.1, height=.1) {
     len <- sapply(list(subview, x, y, width, height), length)
