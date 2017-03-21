@@ -1,3 +1,7 @@
+CHANGES IN VERSION 0.0.3
+------------------------
+ o geom_subview <2017-03-21, Tue>
+
 CHANGES IN VERSION 0.0.2
 ------------------------
  o remove parsing `image` parameter via `...`, and set image="https://www.r-project.org/logo/Rlogo.png" by default <2017-02-22, Wed>
