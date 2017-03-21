@@ -38,7 +38,7 @@ geom_subview <- function(subview, x, y, width=.1, height=.1) {
         subview <- d$subview[[i]]
 
         if (inherits(subview, "expression")) {
-            tmp <- eval(subview) ## base plot not return value via `invisible()`
+            tmp <- eval(subview) ## base plot may return value via `invisible()`
             if (is.null(tmp) || is.null(toGrob(tmp))) {
                 grid.echo()
                 subview <- grid.grab()
