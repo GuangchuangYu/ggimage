@@ -38,10 +38,15 @@ geom_subview <- function(subview, x, y, width=.1, height=.1) {
         height <- d$height[i]
 
         pushViewport(viewport())
-        xmin <- convertUnit(unit(x, "native") - unit(width/2, "npc"), "native")
-        xmax <- convertUnit(unit(x, "native") + unit(width/2, "npc"), "native")
-        ymin <- convertUnit(unit(y, "native") - unit(height/2, "npc"), "native")
-        ymax <- convertUnit(unit(y, "native") + unit(height/2, "npc"), "native")
+        ## xmin <- convertUnit(unit(x, "native") - unit(width/2, "npc"), "native")
+        ## xmax <- convertUnit(unit(x, "native") + unit(width/2, "npc"), "native")
+        ## ymin <- convertUnit(unit(y, "native") - unit(height/2, "npc"), "native")
+        ## ymax <- convertUnit(unit(y, "native") + unit(height/2, "npc"), "native")
+        xmin <- convertUnit(unit(x, "native") - unit(width/2, "native"), "native")
+        xmax <- convertUnit(unit(x, "native") + unit(width/2, "native"), "native")
+        ymin <- convertUnit(unit(y, "native") - unit(height/2, "native"), "native")
+        ymax <- convertUnit(unit(y, "native") + unit(height/2, "native"), "native")
+
 
         annotation_custom(
             toGrob(d$subview[[i]]),
