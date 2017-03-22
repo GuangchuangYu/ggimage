@@ -1,5 +1,7 @@
 CHANGES IN VERSION 0.0.4
 ------------------------
+ o geom_phylopic layer <2017-03-22, Wed>
+ o color parameter for geom_image and related layers <2017-03-22, Wed>
  o geom_pokemon <2017-03-22, Wed>
 
 CHANGES IN VERSION 0.0.3

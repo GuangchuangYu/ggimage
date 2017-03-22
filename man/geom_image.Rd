@@ -6,7 +6,7 @@
 \usage{
 geom_image(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", inherit.aes = TRUE, na.rm = FALSE,
-  by = "width", ...)
+  by = "width", color = NULL, ...)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -22,6 +22,8 @@ geom_image(mapping = NULL, data = NULL, stat = "identity",
 \item{na.rm}{logical, whether remove NA values}
 
 \item{by}{one of 'width' or 'height'}
+
+\item{color}{specify the color of image. NULL for original color}
 
 \item{...}{additional parameters}
 }
