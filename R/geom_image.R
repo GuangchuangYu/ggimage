@@ -65,6 +65,8 @@ GeomImage <- ggproto("GeomImage", Geom,
                              data$image = pokemon(data$image)
                          } else if (geom == "phylopic") {
                              data$image = phylopic(data$image, height)
+                         } else if (geom == "flag") {
+                             data$image = flag(data$image)
                          }
 
                          groups <- split(data, factor(data$image))
@@ -93,7 +95,15 @@ imageGrob <- function(x, y, size, img, by, color, alpha) {
         img <- readImage(img)
         asp <- getAR(img)
     }
-    if (by == "width") {
+
+    unit <- "native"
+    if (any(size == Inf)) {
+        x <- 0.5
+        y <- 0.5
+        width <- 1
+        height <- 1
+        unit <- "npc"
+    } else if (by == "width") {
         width <- size
         height <- size/asp
     } else {
@@ -110,12 +120,14 @@ imageGrob <- function(x, y, size, img, by, color, alpha) {
         img[,,3] <- color[3]
     }
 
-    img[,,4] <- img[,,4]*alpha
-
+    if (dim(img)[3] >= 4) {
+        img[,,4] <- img[,,4]*alpha
+    }
+    
     rasterGrob(x = x,
                y = y,
                image = img,
-               default.units = "native",
+               default.units = unit,
                height = height,
                width = width,
                interpolate = FALSE)

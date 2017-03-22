@@ -15,4 +15,3 @@ list available pokemon
 \author{
 guangchuang yu
 }
-
