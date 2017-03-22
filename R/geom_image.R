@@ -55,8 +55,12 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
 ##' @importFrom grid gTree
 ##' @importFrom grid gList
 GeomImage <- ggproto("GeomImage", Geom,
-                     draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE) {
+                     draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE, geom="image") {
                          data <- coord$transform(data, panel_scales)
+
+                         if (geom == "pokemon") {
+                             data$image = pokemon(data$image)
+                         }
 
                          groups <- split(data, factor(data$image))
                          imgs <- names(groups)
