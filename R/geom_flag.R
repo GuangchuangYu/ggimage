@@ -2,12 +2,7 @@
 ##'
 ##'
 ##' @title geom_flag
-##' @param mapping aes mapping
-##' @param data data
-##' @param inherit.aes whether inherit aes mapping from ggplot()
-##' @param na.rm whether remove NA values
-##' @param by one of 'width' or 'height' for specifying size
-##' @param ... additional parameter
+##' @inheritParams geom_pokemon
 ##' @return ggplot2 layer
 ##' @export
 ##' @author guangchuang yu

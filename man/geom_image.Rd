@@ -48,3 +48,4 @@ ggplot(d, aes(x, y)) + geom_image(aes(image=image))
 \author{
 guangchuang yu
 }
+

@@ -62,11 +62,13 @@ GeomImage <- ggproto("GeomImage", Geom,
                          data <- coord$transform(data, panel_scales)
 
                          if (geom == "pokemon") {
-                             data$image = pokemon(data$image)
+                             data$image <- pokemon(data$image)
                          } else if (geom == "phylopic") {
-                             data$image = phylopic(data$image, height)
+                             data$image <- phylopic(data$image, height)
                          } else if (geom == "flag") {
-                             data$image = flag(data$image)
+                             data$image <- flag(data$image)
+                         } else if (geom == "emoji") {
+                             data$image <- emoji(data$image)
                          }
 
                          groups <- split(data, factor(data$image))
@@ -123,7 +125,7 @@ imageGrob <- function(x, y, size, img, by, color, alpha) {
     if (dim(img)[3] >= 4) {
         img[,,4] <- img[,,4]*alpha
     }
-    
+
     rasterGrob(x = x,
                y = y,
                image = img,

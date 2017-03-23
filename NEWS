@@ -1,5 +1,6 @@
 CHANGES IN VERSION 0.0.4
 ------------------------
+ o geom_emoji <2017-03-23, Thu>
  o geom_flag <2017-03-22, Wed>
  o support size = Inf <2017-03-22, Wed>
  o geom_phylopic layer <2017-03-22, Wed>

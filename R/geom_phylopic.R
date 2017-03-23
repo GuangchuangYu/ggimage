@@ -2,13 +2,8 @@
 ##'
 ##'
 ##' @title geom_phylopic
-##' @param mapping aes mapping
-##' @param data data
-##' @param inherit.aes whether inherit aes mapping from ggplot()
-##' @param na.rm whether remove NA values
-##' @param by one of 'width' or 'height' for specifying size
+##' @inheritParams geom_pokemon
 ##' @param height size (by height) of phylopic image to be used
-##' @param ... additional parameter
 ##' @return ggplot2 layer
 ##' @export
 ##' @author guangchuang yu
