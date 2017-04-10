@@ -7,7 +7,7 @@
 ##' @importFrom ggplot2 theme
 ##' @importFrom ggplot2 element_rect
 ##' @export
-##' @author Guangchuang Yu
+##' @author Guangchuang Yu with contributions from Hugo Gruson
 theme_transparent <- function(...) {
     theme(panel.background = element_rect(
               fill = "transparent",
@@ -22,3 +22,4 @@ theme_transparent <- function(...) {
               fill = "transparent",
               colour = NA), ...)
 }
+
