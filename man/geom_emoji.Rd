@@ -29,4 +29,3 @@ geom layer for using emoji image
 \author{
 guangchuang yu
 }
-

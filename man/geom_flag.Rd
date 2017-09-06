@@ -29,4 +29,3 @@ geom layer for using flag image
 \author{
 guangchuang yu
 }
-

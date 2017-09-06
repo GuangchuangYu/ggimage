@@ -28,8 +28,11 @@ pokemon <- function(id) {
 ##' @export
 ##' @author guangchuang yu
 list.pokemon <- function() {
-     x <- readLines("https://github.com/Templarian/slack-emoji-pokemon/tree/master/emojis")
-     y <- x[grep("title=\"\\w+\\.png", x)]
-     sub(".*title=\"(\\w+)\\.png.*", '\\1', y)
+    list.png("https://github.com/Templarian/slack-emoji-pokemon/tree/master/emojis")
 }
 
+list.png <- function(url) {
+    x <- readLines(url)
+    y <- x[grep("title=\"\\w+\\.png", x)]
+    sub(".*title=\"(\\w+)\\.png.*", '\\1', y)
+}

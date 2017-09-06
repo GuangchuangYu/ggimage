@@ -69,6 +69,8 @@ GeomImage <- ggproto("GeomImage", Geom,
                              data$image <- flag(data$image)
                          } else if (geom == "emoji") {
                              data$image <- emoji(data$image)
+                         } else if (geom == "icon") {
+                             data$image <- icon(data$image)
                          }
 
                          groups <- split(data, factor(data$image))

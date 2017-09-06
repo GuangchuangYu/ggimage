@@ -16,6 +16,5 @@ ggplot object
 transparent background theme
 }
 \author{
-Guangchuang Yu
+Guangchuang Yu with contributions from Hugo Gruson
 }
-
