@@ -33,6 +33,6 @@ list.pokemon <- function() {
 
 list.png <- function(url) {
     x <- readLines(url)
-    y <- x[grep("title=\"\\w+\\.png", x)]
-    sub(".*title=\"(\\w+)\\.png.*", '\\1', y)
+    y <- x[grep("title=\"[a-zA-Z0-9\\-]+\\.png", x)]
+    sub(".*title=\"([a-zA-Z0-9\\-]+)\\.png.*", '\\1', y)
 }
