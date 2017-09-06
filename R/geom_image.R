@@ -28,7 +28,7 @@
 ##' @author guangchuang yu
 geom_image <- function(mapping=NULL, data=NULL, stat="identity",
                        position="identity", inherit.aes=TRUE,
-                       na.rm=FALSE, by="width",  color=NULL, ...) {
+                       na.rm=FALSE, by="width", color=NULL, ...) {
 
     by <- match.arg(by, c("width", "height"))
 
@@ -58,20 +58,11 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
 ##' @importFrom grid gList
 GeomImage <- ggproto("GeomImage", Geom,
                      draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE,
-                                           image_color=NULL, alpha=1, geom="image", height) {
+                                           image_color=NULL, alpha=1, .fun = NULL, height) {
                          data <- coord$transform(data, panel_scales)
 
-                         if (geom == "pokemon") {
-                             data$image <- pokemon(data$image)
-                         } else if (geom == "phylopic") {
-                             data$image <- phylopic(data$image, height)
-                         } else if (geom == "flag") {
-                             data$image <- flag(data$image)
-                         } else if (geom == "emoji") {
-                             data$image <- emoji(data$image)
-                         } else if (geom == "icon") {
-                             data$image <- icon(data$image)
-                         }
+                         if (!is.null(.fun) && is.function(.fun))
+                             data$image <- .fun(data$image)
 
                          groups <- split(data, factor(data$image))
                          imgs <- names(groups)

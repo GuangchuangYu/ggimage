@@ -8,7 +8,7 @@
 ##' @author guangchuang yu
 geom_emoji <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
                        na.rm=FALSE, by="width", ...) {
-    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., geom = 'emoji')
+    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., .fun = emoji)
 }
 
 emoji <- function(emoji) {

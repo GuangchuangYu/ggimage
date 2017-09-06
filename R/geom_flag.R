@@ -8,7 +8,7 @@
 ##' @author guangchuang yu
 geom_flag <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
                        na.rm=FALSE, by="width", ...) {
-    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., geom = 'flag')
+    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., .fun = flag)
 }
 
 flag <- function(flag) {

@@ -13,7 +13,7 @@
 ##' @author guangchuang yu
 geom_pokemon <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
                        na.rm=FALSE, by="width", ...) {
-    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., geom = 'pokemon')
+    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., .fun = pokemon)
 }
 
 pokemon <- function(id) {
