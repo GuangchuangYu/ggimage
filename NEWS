@@ -1,5 +1,6 @@
 CHANGES IN VERSION 0.0.6
 ------------------------
+ o add image_fun parameter; user can use magick function to process image <2017-10-17, Tue>
  o using magick to read image instead of EBImage <2017-10-17, Tue>
 
 CHANGES IN VERSION 0.0.5
