@@ -58,7 +58,7 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
 ##' @importFrom grid gList
 GeomImage <- ggproto("GeomImage", Geom,
                      draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE,
-                                           image_color=NULL, alpha=1, .fun = NULL, height, outline=TRUE) {
+                                           image_color=NULL, alpha=1, .fun = NULL, height, outline=TRUE, image_fun = NULL) {
                          data <- coord$transform(data, panel_scales)
 
                          if (!is.null(.fun) && is.function(.fun))
@@ -68,7 +68,7 @@ GeomImage <- ggproto("GeomImage", Geom,
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
                              data <- groups[[i]]
-                             imageGrob(data$x, data$y, data$size, imgs[i], by, image_color, alpha, outline)
+                             imageGrob(data$x, data$y, data$size, imgs[i], by, image_color, alpha, outline, image_fun)
                          })
                          ggplot2:::ggname("geom_image",
                                           gTree(children = do.call("gList", grobs)))
@@ -86,7 +86,7 @@ GeomImage <- ggproto("GeomImage", Geom,
 ##' @importFrom grDevices rgb
 ##' @importFrom grDevices col2rgb
 ##' @importFrom methods is
-imageGrob <- function(x, y, size, img, by, color, alpha, outline=TRUE) {
+imageGrob <- function(x, y, size, img, by, color, alpha, outline=TRUE, image_fun) {
     if (!is(img, "magick-image")) {
         img <- image_read(img)
         asp <- getAR2(img)
@@ -113,6 +113,11 @@ imageGrob <- function(x, y, size, img, by, color, alpha, outline=TRUE) {
         }
         img <- image_colorize(img, color=color, alpha * 100)
     }
+
+    if (!is.null(image_fun)) {
+        img <- image_fun(img)
+    }
+
 
     rasterGrob(x = x,
                y = y,
