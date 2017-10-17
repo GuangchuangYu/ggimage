@@ -1,16 +1,19 @@
 Package: ggimage
 Title: Use Image in 'ggplot2'
-Version: 0.0.5
-Authors@R: person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre"))
+Version: 0.0.6
+Authors@R: person("Guangchuang", "Yu",
+                  email = "guangchuangyu@gmail.com",
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0002-6485-8781"))
 Description: Supports image files and graphic objects to be visualized in
     'ggplot2' graphic system.
 Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
-    EBImage,
     grid,
     gridGraphics,
+    magick,
     methods,
     scales,
     tibble

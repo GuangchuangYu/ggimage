@@ -58,7 +58,7 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
 ##' @importFrom grid gList
 GeomImage <- ggproto("GeomImage", Geom,
                      draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE,
-                                           image_color=NULL, alpha=1, .fun = NULL, height) {
+                                           image_color=NULL, alpha=1, .fun = NULL, height, outline=TRUE) {
                          data <- coord$transform(data, panel_scales)
 
                          if (!is.null(.fun) && is.function(.fun))
@@ -68,7 +68,7 @@ GeomImage <- ggproto("GeomImage", Geom,
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
                              data <- groups[[i]]
-                             imageGrob(data$x, data$y, data$size, imgs[i], by, image_color, alpha)
+                             imageGrob(data$x, data$y, data$size, imgs[i], by, image_color, alpha, outline)
                          })
                          ggplot2:::ggname("geom_image",
                                           gTree(children = do.call("gList", grobs)))
@@ -79,16 +79,17 @@ GeomImage <- ggproto("GeomImage", Geom,
                      draw_key = draw_key_blank ## need to write the `draw_key_image` function.
                      )
 
-##' @importFrom EBImage readImage
-##' @importFrom EBImage channel
+
+##' @importFrom magick image_read
+##' @importFrom magick image_colorize
 ##' @importFrom grid rasterGrob
 ##' @importFrom grDevices rgb
 ##' @importFrom grDevices col2rgb
 ##' @importFrom methods is
-imageGrob <- function(x, y, size, img, by, color, alpha) {
-    if (!is(img, "Image")) {
-        img <- readImage(img)
-        asp <- getAR(img)
+imageGrob <- function(x, y, size, img, by, color, alpha, outline=TRUE) {
+    if (!is(img, "magick-image")) {
+        img <- image_read(img)
+        asp <- getAR2(img)
     }
 
     unit <- "native"
@@ -107,16 +108,10 @@ imageGrob <- function(x, y, size, img, by, color, alpha) {
     }
 
     if (!is.null(color)) {
-        color <- col2rgb(color) / 255
-
-        img <- channel(img, 'rgb')
-        img[,,1] <- color[1]
-        img[,,2] <- color[2]
-        img[,,3] <- color[3]
-    }
-
-    if (dim(img)[3] >= 4) {
-        img[,,4] <- img[,,4]*alpha
+        if (outline) {
+            img <- image_colorize(img, color="white", 100)
+        }
+        img <- image_colorize(img, color=color, alpha * 100)
     }
 
     rasterGrob(x = x,
@@ -129,10 +124,64 @@ imageGrob <- function(x, y, size, img, by, color, alpha) {
 }
 
 
-getAR <- function(img) {
-    dims <- dim(img)[1:2]
-    dims[1]/dims[2]
+##' @importFrom magick image_info
+getAR2 <- function(magick_image) {
+    info <- image_info(magick_image)
+    info$width/info$height
 }
+
+
+
+## @importFrom EBImage readImage
+## @importFrom EBImage channel
+## imageGrob2 <- function(x, y, size, img, by, color, alpha) {
+##     if (!is(img, "Image")) {
+##         img <- readImage(img)
+##         asp <- getAR(img)
+##     }
+
+##     unit <- "native"
+##     if (any(size == Inf)) {
+##         x <- 0.5
+##         y <- 0.5
+##         width <- 1
+##         height <- 1
+##         unit <- "npc"
+##     } else if (by == "width") {
+##         width <- size
+##         height <- size/asp
+##     } else {
+##         width <- size * asp
+##         height <- size
+##     }
+
+##     if (!is.null(color)) {
+##         color <- col2rgb(color) / 255
+
+##         img <- channel(img, 'rgb')
+##         img[,,1] <- color[1]
+##         img[,,2] <- color[2]
+##         img[,,3] <- color[3]
+##     }
+
+##     if (dim(img)[3] >= 4) {
+##         img[,,4] <- img[,,4]*alpha
+##     }
+
+##     rasterGrob(x = x,
+##                y = y,
+##                image = img,
+##                default.units = unit,
+##                height = height,
+##                width = width,
+##                interpolate = FALSE)
+## }
+
+
+## getAR <- function(img) {
+##     dims <- dim(img)[1:2]
+##     dims[1]/dims[2]
+## }
 
 
 ##################################################
