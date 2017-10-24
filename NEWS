@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.0.7
+------------------------
+ o geom_subview compatible with meme object <2017-10-24, Tue>
+   + https://github.com/GuangchuangYu/meme
+
 CHANGES IN VERSION 0.0.6
 ------------------------
  o add image_fun parameter; user can use magick function to process image <2017-10-17, Tue>

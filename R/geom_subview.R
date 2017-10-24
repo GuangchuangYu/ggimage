@@ -71,9 +71,13 @@ toGrob <- function(subview) {
 
 
 ##' @importFrom ggplot2 ggplotGrob
+##' @importFrom rvcheck get_fun_from_pkg
 toGrob_ <- function(subview) {
     if (inherits(subview, "ggplot")) {
         sv <- ggplotGrob(subview)
+    } else if (inherits(subview, "meme")) {
+        memeGrob <- get_fun_from_pkg("meme", "memeGrob")
+        sv <- memeGrob(subview)
     } else if (inherits(subview, "trellis")) {
         sv <- grid::grid.grabExpr(print(subview))
     } else if (inherits(subview, "grob")) {
@@ -83,6 +87,9 @@ toGrob_ <- function(subview) {
     }
     return(sv)
 }
+
+
+
 
 
 unit <- grid::unit
