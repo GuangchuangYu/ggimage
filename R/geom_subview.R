@@ -93,3 +93,11 @@ toGrob_ <- function(subview) {
 
 
 unit <- grid::unit
+
+
+
+##' @method length gg
+##' @export
+length.gg <- function(x) {
+    return(1)
+}
