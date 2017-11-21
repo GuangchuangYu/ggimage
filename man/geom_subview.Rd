@@ -4,18 +4,23 @@
 \alias{geom_subview}
 \title{geom_subview}
 \usage{
-geom_subview(subview, x, y, width = 0.1, height = 0.1)
+geom_subview(mapping = NULL, data = NULL, width = 0.1, height = 0.1,
+  x = NULL, y = NULL, subview = NULL)
 }
 \arguments{
-\item{subview}{subview}
+\item{mapping}{aes mapping, requires 'x', 'y' and 'subview'}
 
-\item{x}{x position}
-
-\item{y}{y position}
+\item{data}{data frame}
 
 \item{width}{width}
 
 \item{height}{height}
+
+\item{x}{x position of subview. This parameter works if mapping and data is not provided}
+
+\item{y}{y position of subview. This parameter works if mapping and data is not provided}
+
+\item{subview}{subview to plot, if not provided in data and specify by mapping}
 }
 \value{
 layer

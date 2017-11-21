@@ -1,3 +1,7 @@
+CHANGES IN VERSION 0.0.8
+------------------------
+ o geom_subview now supports aes mapping <2017-11-21, Tue>
+
 CHANGES IN VERSION 0.0.7
 ------------------------
  o geom_subview compatible with meme object <2017-10-24, Tue>
