@@ -1,3 +1,8 @@
+geom_ggtree_image <- function() {
+
+}
+
+
 ##' geom layer for visualizing image files
 ##'
 ##'
@@ -10,6 +15,7 @@
 ##' @param na.rm logical, whether remove NA values
 ##' @param by one of 'width' or 'height'
 ##' @param color specify the color of image. NULL for original color
+##' @param nudge_x horizontal adjustment to nudge image
 ##' @param ... additional parameters
 ##' @return geom layer
 ##' @importFrom ggplot2 layer
@@ -28,7 +34,7 @@
 ##' @author guangchuang yu
 geom_image <- function(mapping=NULL, data=NULL, stat="identity",
                        position="identity", inherit.aes=TRUE,
-                       na.rm=FALSE, by="width", color=NULL, ...) {
+                       na.rm=FALSE, by="width", color=NULL, nudge_x = 0, ...) {
 
     by <- match.arg(by, c("width", "height"))
 
@@ -44,6 +50,7 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
             na.rm = na.rm,
             by = by,
             image_color = color,
+            nudge_x = nudge_x,
             ...),
         check.aes = FALSE
     )
@@ -57,9 +64,18 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
 ##' @importFrom grid gTree
 ##' @importFrom grid gList
 GeomImage <- ggproto("GeomImage", Geom,
+                     setup_data = function(data, params) {
+                         if (is.null(data$subset))
+                             return(data)
+                         data[which(data$subset),]
+                     },
+
                      draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE,
-                                           image_color=NULL, alpha=1, .fun = NULL, height, outline=TRUE, image_fun = NULL) {
+                                           image_color=NULL, alpha=1, .fun = NULL, height, image_fun = NULL, hjust=0.5, nudge_x = 0, nudge_y = 0) {
+                         data$x <- data$x + nudge_x
+                         data$y <- data$y + nudge_y
                          data <- coord$transform(data, panel_scales)
+
 
                          if (!is.null(.fun) && is.function(.fun))
                              data$image <- .fun(data$image)
@@ -68,10 +84,12 @@ GeomImage <- ggproto("GeomImage", Geom,
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
                              data <- groups[[i]]
-                             imageGrob(data$x, data$y, data$size, imgs[i], by, image_color, alpha, outline, image_fun)
+                             imageGrob(data$x, data$y, data$size, imgs[i], by, hjust, image_color, alpha, image_fun)
                          })
+                         class(grobs) <- "gList"
+
                          ggplot2:::ggname("geom_image",
-                                          gTree(children = do.call("gList", grobs)))
+                                          gTree(children = grobs))
                      },
                      non_missing_aes = c("size", "image"),
                      required_aes = c("x", "y"),
@@ -86,7 +104,7 @@ GeomImage <- ggproto("GeomImage", Geom,
 ##' @importFrom grDevices rgb
 ##' @importFrom grDevices col2rgb
 ##' @importFrom methods is
-imageGrob <- function(x, y, size, img, by, color, alpha, outline=TRUE, image_fun) {
+imageGrob <- function(x, y, size, img, by, hjust, color, alpha, image_fun) {
     if (!is(img, "magick-image")) {
         img <- image_read(img)
         asp <- getAR2(img)
@@ -107,17 +125,29 @@ imageGrob <- function(x, y, size, img, by, color, alpha, outline=TRUE, image_fun
         height <- size
     }
 
-    if (!is.null(color)) {
-        if (outline) {
-            img <- image_colorize(img, color="white", 100)
-        }
-        img <- image_colorize(img, color=color, alpha * 100)
+    if (hjust == 0 || hjust == "left") {
+        x <- x + width/2
+    } else if (hjust == 1 || hjust == "right") {
+        x <- x - width/2
     }
 
     if (!is.null(image_fun)) {
         img <- image_fun(img)
     }
 
+    if (!is.null(color) || alpha != 1) {
+        bitmap <- img[[1]]
+        if (!is.null(color)) {
+            col <- col2rgb(color)
+            bitmap[1,,] <- as.raw(col[1])
+            bitmap[2,,] <- as.raw(col[2])
+            bitmap[3,,] <- as.raw(col[3])
+        }
+
+        if (alpha != 1)
+            bitmap[4,,] <- as.raw(as.integer(bitmap[4,,]) * alpha)
+        img <- image_read(bitmap)
+    }
 
     rasterGrob(x = x,
                y = y,
@@ -135,6 +165,8 @@ getAR2 <- function(magick_image) {
     info$width/info$height
 }
 
+
+compute_just <- getFromNamespace("compute_just", "ggplot2")
 
 
 ## @importFrom EBImage readImage

@@ -1,5 +1,6 @@
 CHANGES IN VERSION 0.0.8
 ------------------------
+ o update vignette <2017-12-04, Mon>
  o geom_subview now supports aes mapping <2017-11-21, Tue>
 
 CHANGES IN VERSION 0.0.7
