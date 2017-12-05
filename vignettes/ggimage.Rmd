@@ -72,7 +72,7 @@ ggplot(iris2, aes(x = Sepal.Length, y = Petal.Length)) +
                  colour = "purple") +
   geom_abline(intercept = model$coefficients[1],
               slope = model$coefficients[2]) +
-    ggimage::geom_emoji(aes(image = ifelse(abs(Petal.Length-fitted) > 0.5, '1f622', '1f600')))
+    geom_emoji(aes(image = ifelse(abs(Petal.Length-fitted) > 0.5, '1f622', '1f600')))
 ```
 
 
