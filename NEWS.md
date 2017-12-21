@@ -1,3 +1,7 @@
+## ggimage 0.1.1
+
++ annotating phylogenetic tree with ggtree and ggimage vignette <2017-12-21, Thu>
+
 CHANGES IN VERSION 0.1.0
 ------------------------
  o update vignette <2017-12-04, Mon>
