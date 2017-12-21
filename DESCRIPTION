@@ -20,7 +20,7 @@ Imports:
     tibble
 Suggests:
     ape,
-    ggtree,
+    ggtree (>= 1.10.1),
     knitr,
     prettydoc
 VignetteBuilder: knitr
