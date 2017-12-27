@@ -16,6 +16,7 @@ geom_ggtree_image <- function() {
 ##' @param by one of 'width' or 'height'
 ##' @param color specify the color of image. NULL for original color
 ##' @param nudge_x horizontal adjustment to nudge image
+##' @param angle angle of image
 ##' @param ... additional parameters
 ##' @return geom layer
 ##' @importFrom ggplot2 layer
@@ -34,7 +35,7 @@ geom_ggtree_image <- function() {
 ##' @author guangchuang yu
 geom_image <- function(mapping=NULL, data=NULL, stat="identity",
                        position="identity", inherit.aes=TRUE,
-                       na.rm=FALSE, by="width", color=NULL, nudge_x = 0, ...) {
+                       na.rm=FALSE, by="width", color=NULL, nudge_x = 0, angle = 0, ...) {
 
     by <- match.arg(by, c("width", "height"))
 
@@ -51,6 +52,7 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
             by = by,
             image_color = color,
             nudge_x = nudge_x,
+            angle = angle,
             ...),
         check.aes = FALSE
     )
@@ -71,7 +73,8 @@ GeomImage <- ggproto("GeomImage", Geom,
                      },
 
                      draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE,
-                                           image_color=NULL, alpha=1, .fun = NULL, height, image_fun = NULL, hjust=0.5, nudge_x = 0, nudge_y = 0) {
+                                           image_color=NULL, alpha=1, .fun = NULL, height, image_fun = NULL,
+                                           hjust=0.5, angle = 0, nudge_x = 0, nudge_y = 0) {
                          data$x <- data$x + nudge_x
                          data$y <- data$y + nudge_y
                          data <- coord$transform(data, panel_scales)
@@ -84,7 +87,7 @@ GeomImage <- ggproto("GeomImage", Geom,
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
                              data <- groups[[i]]
-                             imageGrob(data$x, data$y, data$size, imgs[i], by, hjust, image_color, alpha, image_fun)
+                             imageGrob(data$x, data$y, data$size, imgs[i], by, hjust, image_color, alpha, image_fun, angle)
                          })
                          class(grobs) <- "gList"
 
@@ -101,10 +104,11 @@ GeomImage <- ggproto("GeomImage", Geom,
 ##' @importFrom magick image_read
 ##' @importFrom magick image_colorize
 ##' @importFrom grid rasterGrob
+##' @importFrom grid viewport
 ##' @importFrom grDevices rgb
 ##' @importFrom grDevices col2rgb
 ##' @importFrom methods is
-imageGrob <- function(x, y, size, img, by, hjust, color, alpha, image_fun) {
+imageGrob <- function(x, y, size, img, by, hjust, color, alpha, image_fun, angle) {
     if (!is(img, "magick-image")) {
         img <- image_read(img)
         asp <- getAR2(img)
@@ -155,7 +159,8 @@ imageGrob <- function(x, y, size, img, by, hjust, color, alpha, image_fun) {
                default.units = unit,
                height = height,
                width = width,
-               interpolate = FALSE)
+               interpolate = FALSE,
+               vp = viewport(angle=angle))
 }
 
 

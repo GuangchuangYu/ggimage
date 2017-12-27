@@ -6,7 +6,7 @@
 \usage{
 geom_image(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", inherit.aes = TRUE, na.rm = FALSE,
-  by = "width", color = NULL, nudge_x = 0, ...)
+  by = "width", color = NULL, nudge_x = 0, angle = 0, ...)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -26,6 +26,8 @@ geom_image(mapping = NULL, data = NULL, stat = "identity",
 \item{color}{specify the color of image. NULL for original color}
 
 \item{nudge_x}{horizontal adjustment to nudge image}
+
+\item{angle}{angle of image}
 
 \item{...}{additional parameters}
 }
