@@ -84,17 +84,15 @@ geom_subview <- function(mapping = NULL, data = NULL, width=.1, height=.1, x = N
     })
 }
 
-##' @importFrom gridGraphics grid.echo
-##' @importFrom grid grid.grab
+##' @importFrom base2grob base2grob
 toGrob <- function(subview) {
-    if (inherits(subview, "expression")) {
-        tmp <- eval(subview) ## base plot may return value via `invisible()`
-        if (is.null(tmp) || is.null(toGrob_(tmp))) {
-            grid.echo()
-            subview <- grid.grab()
-        }
+    if (inherits(subview, "expression") ||
+        inherits(subview, "formula") ||
+        inherits(subview, "function")) {
+
+        subview <- base2grob(subview)
     }
-    toGrob_(subview)
+    return(toGrob_(subview))
 }
 
 
@@ -115,7 +113,6 @@ toGrob_ <- function(subview) {
     }
     return(sv)
 }
-
 
 
 

@@ -1,3 +1,7 @@
+## ggimage 0.1.2
+
++ mv code in `toGrob` for base plot to `base2grob` pkg
+
 ## ggimage 0.1.1
 
 + add angle parameter <2017-12-27, Wed>
