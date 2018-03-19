@@ -4,7 +4,7 @@ PKGSRC  := $(shell basename `pwd`)
 
 all: rd check clean
 
-alldocs: rd readme mkdocs
+alldocs: rd readme
 
 rd:
 	Rscript -e 'roxygen2::roxygenise(".")'
