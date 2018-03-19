@@ -2,7 +2,7 @@
 ggimage: Use Image in 'ggplot2'
 ===============================
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/ggimage?color=green)](https://cran.r-project.org/package=ggimage) ![](http://cranlogs.r-pkg.org/badges/grand-total/ggimage?color=green) ![](http://cranlogs.r-pkg.org/badges/ggimage?color=green) ![](http://cranlogs.r-pkg.org/badges/last-week/ggimage?color=green) [![gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/GuangchuangYu/Bioinformatics) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.344625.svg)](https://doi.org/10.5281/zenodo.344625)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/ggimage?color=green)](https://cran.r-project.org/package=ggimage) ![](http://cranlogs.r-pkg.org/badges/grand-total/ggimage?color=green) ![](http://cranlogs.r-pkg.org/badges/ggimage?color=green) ![](http://cranlogs.r-pkg.org/badges/last-week/ggimage?color=green) [![gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/GuangchuangYu/Bioinformatics) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.344625.svg)](https://doi.org/10.5281/zenodo.344625) [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/GuangchuangYu)
 
 Supports image files and graphic objects to be visualized in 'ggplot2' graphic system.
 
