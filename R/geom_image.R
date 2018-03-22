@@ -74,7 +74,7 @@ GeomImage <- ggproto("GeomImage", Geom,
 
                      draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE,
                                            image_color=NULL, alpha=1, .fun = NULL, height, image_fun = NULL,
-                                           hjust=0.5, angle = 0, nudge_x = 0, nudge_y = 0) {
+                                           hjust=0.5, angle = 0, nudge_x = 0, nudge_y = 0, asp=1) {
                          data$x <- data$x + nudge_x
                          data$y <- data$y + nudge_y
                          data <- coord$transform(data, panel_scales)
@@ -87,7 +87,7 @@ GeomImage <- ggproto("GeomImage", Geom,
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
                              data <- groups[[i]]
-                             imageGrob(data$x, data$y, data$size, imgs[i], by, hjust, image_color, alpha, image_fun, angle)
+                             imageGrob(data$x, data$y, data$size, imgs[i], by, hjust, image_color, alpha, image_fun, angle, asp)
                          })
                          class(grobs) <- "gList"
 
@@ -108,10 +108,10 @@ GeomImage <- ggproto("GeomImage", Geom,
 ##' @importFrom grDevices rgb
 ##' @importFrom grDevices col2rgb
 ##' @importFrom methods is
-imageGrob <- function(x, y, size, img, by, hjust, color, alpha, image_fun, angle) {
+imageGrob <- function(x, y, size, img, by, hjust, color, alpha, image_fun, angle, asp=1) {
     if (!is(img, "magick-image")) {
         img <- image_read(img)
-        asp <- getAR2(img)
+        asp <- getAR2(img)/asp
     }
 
     unit <- "native"
