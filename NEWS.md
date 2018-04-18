@@ -1,3 +1,7 @@
+## ggimage 0.1.4
+
++ `ggbackground` for setting background image of ggplot (2018-04-18, Wed)
+
 ## ggimage 0.1.3
 
 + `geom_image` now accepts `asp` parameter to adjust aspect ratio of images
