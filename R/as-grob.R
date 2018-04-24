@@ -19,7 +19,7 @@ as.grob <- function(plot) {
                       error = function(e) NULL)
 
         if (is.null(p)) {
-            p <- grid::grid.grabExpr(base_plot_fun(plot)())
+            p <- grid::grid.grabExpr(base_plot_fun(plot)(), warn=0)
         }
 
         return(p)
