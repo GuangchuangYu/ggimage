@@ -7,10 +7,10 @@
 ##' @export
 ##' @author guangchuang yu
 as.ggplot <- function(plot) {
-    plot_expr <- quo_name(enexpr(plot))
-    if (is.null(plot)) {
-        plot <- as.grob(plot_expr)
-    }
+    ## plot_expr <- quo_name(enexpr(plot))
+    ## if (is.null(plot)) {
+    ##     plot <- as.grob(plot_expr)
+    ## }
 
     ggplot(data.frame(x = 0:1, y = 0:1), aes_(x = ~x, y = ~y)) +
         geom_subview(subview = plot,

@@ -16,7 +16,6 @@ Imports:
     gridGraphics,
     magick,
     methods,
-    rlang,
     rvcheck,
     scales,
     tibble

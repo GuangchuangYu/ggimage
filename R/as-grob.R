@@ -6,18 +6,23 @@
 ##' @return grob object
 ##' @export
 ##' @importFrom base2grob base2grob
-##' @importFrom rlang quo_name
-##' @importFrom rlang enexpr
 ##' @importFrom ggplot2 ggplotGrob
 ##' @importFrom rvcheck get_fun_from_pkg
 ##' @author guangchuang yu
 as.grob <- function(plot) {
-    plot_expr <- quo_name(enexpr(plot))
+    ## plot_expr <- quo_name(enexpr(plot))
     if (inherits(plot, "expression") ||
         inherits(plot, "formula") ||
         inherits(plot, "function")) {
 
-        p <- base2grob(plot)
+        p <- tryCatch(base2grob(plot),
+                      error = function(e) NULL)
+
+        if (is.null(p)) {
+            p <- grid::grid.grabExpr(base_plot_fun(plot)())
+        }
+
+        return(p)
     }
 
     if (inherits(plot, "ggplot")) {
@@ -30,12 +35,13 @@ as.grob <- function(plot) {
         p <- grid::grid.grabExpr(print(plot))
     } else if (inherits(plot, "grob")) {
         p <- plot
-    } else if (inherits(plot, "character")) {
-        p <- grid::grid.grabExpr(parse(text = plot), warn=0)
     } else {
-        p <- grid::grid.grabExpr(parse(text = plot_expr), warn=0)
+        message("fail to convert ...")
+        return(NULL)
+        ## p <- grid::grid.grabExpr(parse(text = plot_expr), warn=0)
     }
 
     return(p)
 }
 
+base_plot_fun <- getFromNamespace("base_plot_fun", "base2grob")
