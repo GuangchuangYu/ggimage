@@ -76,45 +76,13 @@ geom_subview <- function(mapping = NULL, data = NULL, width=.1, height=.1, x = N
 
     lapply(1:nrow(data), function(i) {
         annotation_custom(
-            toGrob(data$subview[[i]]),
+            as.grob(data$subview[[i]]),
             xmin = data$xmin[i],
             xmax = data$xmax[i],
             ymin = data$ymin[i],
             ymax = data$ymax[i])
     })
 }
-
-##' @importFrom base2grob base2grob
-toGrob <- function(subview) {
-    if (inherits(subview, "expression") ||
-        inherits(subview, "formula") ||
-        inherits(subview, "function")) {
-
-        subview <- base2grob(subview)
-    }
-    return(toGrob_(subview))
-}
-
-
-##' @importFrom ggplot2 ggplotGrob
-##' @importFrom rvcheck get_fun_from_pkg
-toGrob_ <- function(subview) {
-    if (inherits(subview, "ggplot")) {
-        sv <- ggplotGrob(subview)
-    } else if (inherits(subview, "meme")) {
-        memeGrob <- get_fun_from_pkg("meme", "memeGrob")
-        sv <- memeGrob(subview)
-    } else if (inherits(subview, "trellis")) {
-        sv <- grid::grid.grabExpr(print(subview))
-    } else if (inherits(subview, "grob")) {
-        sv <- subview
-    } else {
-        return(NULL)
-    }
-    return(sv)
-}
-
-
 
 
 unit <- grid::unit

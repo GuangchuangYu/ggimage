@@ -7,8 +7,6 @@
 ##' @param ... additional parameter to manipulate background image, see also geom_image
 ##' @return gg object
 ##' @importFrom ggplot2 ggplot
-##' @importFrom ggplot2 aes_
-##' @importFrom ggplot2 theme_void
 ##' @export
 ##' @author guangchuang yu
 ggbackground <- function(gg, background, ...) {
@@ -16,5 +14,5 @@ ggbackground <- function(gg, background, ...) {
         geom_image(image = background,size=Inf, ...) +
         geom_subview(subview = gg + theme_transparent(),
                      width=Inf, height=Inf, x=.5, y=.5) +
-        theme_void() + theme(plot.margin=unit(c(0,0, -.2, -.2), "lines"))
+        theme_nothing()
 }

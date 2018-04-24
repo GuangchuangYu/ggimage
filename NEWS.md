@@ -1,3 +1,8 @@
+## ggimage 0.1.5
+
++ `as.grob` and `as.ggplot` function for converting `plot` to `grob` or `ggplot`
+  object (2018-04-24, Tue)
+
 ## ggimage 0.1.4
 
 + `ggbackground` for setting background image of ggplot (2018-04-18, Wed)
