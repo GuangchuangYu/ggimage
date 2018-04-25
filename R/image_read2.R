@@ -19,13 +19,15 @@ image_read2 <- function(path, ..., cut_empty_space = TRUE) {
     bitmap <- img[[1]]
     info <- image_info(img)
 
-    row_not_blank <- c(which(rowSums(bitmap[1,,] == "ff") != info$height),
-            which(rowSums(bitmap[2,,] == "ff") != info$height),
-            which(rowSums(bitmap[3,,] == "ff") != info$height))
+    row_not_blank <- c(range(which(rowSums(bitmap[1,,] == "ff") != info$height)),
+                       range(which(rowSums(bitmap[2,,] == "ff") != info$height)),
+                       range(which(rowSums(bitmap[3,,] == "ff") != info$height))
+                       )
 
-    col_not_blank <- c(which(colSums(bitmap[1,,] == "ff") != info$width),
-            which(colSums(bitmap[2,,] == "ff") != info$width),
-            which(colSums(bitmap[3,,] == "ff") != info$width))
+    col_not_blank <- c(range(which(colSums(bitmap[1,,] == "ff") != info$width)),
+                       range(which(colSums(bitmap[2,,] == "ff") != info$width)),
+                       range(which(colSums(bitmap[3,,] == "ff") != info$width))
+                       )
 
     row_min <- min(row_not_blank)
     row_max <- max(row_not_blank)
@@ -38,6 +40,7 @@ image_read2 <- function(path, ..., cut_empty_space = TRUE) {
 
     bitmap <- array(as.raw(0),
         dim = c(3, row_max - row_min + 1, col_max - col_min + 1))
+
     bitmap[1,,] <- x
     bitmap[2,,] <- y
     bitmap[3,,] <- z
