@@ -23,3 +23,21 @@ theme_transparent <- function(...) {
               colour = NA), ...)
 }
 
+
+
+##' A theme that only show the plot panel
+##'
+##'
+##' @title theme_nothing
+##' @param base_size font size
+##' @param base_family font family
+##' @importFrom ggplot2 %+replace%
+##' @importFrom ggplot2 aes_
+##' @importFrom ggplot2 theme_void
+##' @return ggplot2 theme
+##' @export
+##' @author Guangchuang Yu
+theme_nothing <- function(base_size = 11, base_family = "") {
+    theme_void(base_size = base_size, base_family = base_family) %+replace%
+    theme(plot.margin=unit(c(0,0, -.2, -.2), "lines"))
+}

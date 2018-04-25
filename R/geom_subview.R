@@ -13,6 +13,7 @@
 ##' @importFrom ggplot2 annotation_custom
 ##' @importFrom ggplot2 aes_
 ##' @importFrom tibble as_data_frame
+##' @importFrom ggplotify as.grob
 ## @importFrom grid convertUnit
 ## @importFrom grid viewport
 ## @importFrom grid pushViewport

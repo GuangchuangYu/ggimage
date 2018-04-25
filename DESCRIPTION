@@ -11,7 +11,7 @@ Depends:
     R (>= 3.4.0),
     ggplot2
 Imports:
-    base2grob,
+    ggplotify,
     grid,
     gridGraphics,
     magick,

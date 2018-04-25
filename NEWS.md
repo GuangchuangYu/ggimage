@@ -1,7 +1,8 @@
 ## ggimage 0.1.5
 
-+ `as.grob` and `as.ggplot` function for converting `plot` to `grob` or `ggplot`
-  object (2018-04-24, Tue)
++ `image_read2` internally use `magick::image_read` with additional feature to
+  remove marginal empty space (2018-04-25, Wed)
++ re-export `ggplotify::as.grob` and `ggplotify::as.ggplot` (2018-04-24, Tue)
 
 ## ggimage 0.1.4
 
