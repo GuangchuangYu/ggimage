@@ -18,7 +18,8 @@ Imports:
     methods,
     rvcheck,
     scales,
-    tibble
+    tibble,
+    utils
 Suggests:
     ape,
     ggtree (>= 1.10.1),

@@ -51,22 +51,25 @@ geom_subview <- function(mapping = NULL, data = NULL, width=.1, height=.1, x = N
         }
         data$subview <- subview
     } else {
-        data$subview <- data[[as.character(mapping$subview)]]
+        sv_var <- get_aes_var(mapping, 'subview')
+        data$subview <- data[[sv_var]]
     }
 
-    xvar <- as.character(mapping$x)
-    yvar <- as.character(mapping$y)
+    xvar <- get_aes_var(mapping, 'x')
+    yvar <- get_aes_var(mapping, 'y')
 
     if (is.null(mapping$width)) {
         data$width <- width
     } else {
-        data$width <- data[[as.character(mapping$width)]]
+        width_var <- get_aes_var(mapping, 'width')
+        data$width <- data[[width_var]]
     }
 
     if (is.null(mapping$height)) {
         data$height <- height
     } else {
-        data$height <- data[[as.character(mapping$height)]]
+        height_var <- get_aes_var(mapping, 'height')
+        data$height <- data[[height_var]]
     }
 
 
@@ -88,3 +91,9 @@ geom_subview <- function(mapping = NULL, data = NULL, width=.1, height=.1, x = N
 
 unit <- grid::unit
 
+##' @importFrom utils tail
+get_aes_var <- function(mapping, var) {
+    res <- as.character(mapping[[var]])
+    ## to compatible with ggplot2 v=2.2.2
+    tail(res, 1)
+}

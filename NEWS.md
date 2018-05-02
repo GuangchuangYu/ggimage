@@ -1,5 +1,6 @@
 ## ggimage 0.1.5
 
++ compatible with ggplot2-dev, v=2.2.1.9000 (2018-05-02, Wed)
 + `image_read2` internally use `magick::image_read` with additional feature to
   remove marginal empty space (2018-04-25, Wed)
 + re-export `ggplotify::as.grob` and `ggplotify::as.ggplot` (2018-04-24, Tue)
