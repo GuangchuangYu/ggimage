@@ -12,7 +12,7 @@ geom_icon <- function(mapping = NULL, data = NULL, inherit.aes = TRUE,
 }
 
 icon <- function(id) {
-    paste0('https://raw.githubusercontent.com/ionic-team/ionicons/master/png/512/', id, '.png')
+    paste0('https://raw.githubusercontent.com/ionic-team/ionicons/master/src/svg/', id, '.svg')
 }
 
 ##' list available icon
@@ -23,5 +23,5 @@ icon <- function(id) {
 ##' @export
 ##' @author guangchuang yu
 list.icon <- function() {
-    list.png("https://github.com/ionic-team/ionicons/tree/master/png/512")
+    list.png("https://github.com/ionic-team/ionicons/tree/master/src/svg")
 }

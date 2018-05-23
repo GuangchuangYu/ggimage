@@ -1,3 +1,8 @@
+## ggimage 0.1.5.001
+
++ update url of `icon`and `list.icon` (2018-05-23, Wed)
++ mv `get_aes_var` to `rvcheck`
+
 ## ggimage 0.1.5
 
 + compatible with ggplot2-dev, v=2.2.1.9000 (2018-05-02, Wed)

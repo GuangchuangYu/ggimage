@@ -1,6 +1,6 @@
 Package: ggimage
 Title: Use Image in 'ggplot2'
-Version: 0.1.5
+Version: 0.1.5.001
 Authors@R: person("Guangchuang", "Yu",
                   email = "guangchuangyu@gmail.com",
                   role = c("aut", "cre"),
@@ -16,10 +16,9 @@ Imports:
     gridGraphics,
     magick,
     methods,
-    rvcheck,
+    rvcheck (>= 0.1.0),
     scales,
-    tibble,
-    utils
+    tibble
 Suggests:
     ape,
     ggtree (>= 1.10.1),

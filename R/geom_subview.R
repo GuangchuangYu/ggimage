@@ -14,6 +14,7 @@
 ##' @importFrom ggplot2 aes_
 ##' @importFrom tibble as_data_frame
 ##' @importFrom ggplotify as.grob
+##' @importFrom rvcheck get_aes_var
 ## @importFrom grid convertUnit
 ## @importFrom grid viewport
 ## @importFrom grid pushViewport
@@ -91,9 +92,3 @@ geom_subview <- function(mapping = NULL, data = NULL, width=.1, height=.1, x = N
 
 unit <- grid::unit
 
-##' @importFrom utils tail
-get_aes_var <- function(mapping, var) {
-    res <- as.character(mapping[[var]])
-    ## to compatible with ggplot2 v=2.2.2
-    tail(res, 1)
-}
