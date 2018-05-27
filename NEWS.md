@@ -1,4 +1,4 @@
-## ggimage 0.1.5.001
+## ggimage 0.1.6
 
 + update url of `icon`and `list.icon` (2018-05-23, Wed)
 + mv `get_aes_var` to `rvcheck`
