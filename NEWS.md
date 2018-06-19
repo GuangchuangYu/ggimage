@@ -1,3 +1,7 @@
+## ggimage 0.1.7
+
++ `geom_worldcup2018` layer (2018-06-19, Tue)
+
 ## ggimage 0.1.6
 
 + update url of `icon`and `list.icon` (2018-05-23, Wed)
