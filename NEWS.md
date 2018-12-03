@@ -1,8 +1,9 @@
 ## ggimage 0.1.8
 
 + support `pdf` file (2018-12-03, Mon)
-+ support `svg` file 
++ support `svg` file
   - <https://github.com/GuangchuangYu/ggimage/issues/11>
++ `geom_twitchemote` layer
 
 ## ggimage 0.1.7
 
