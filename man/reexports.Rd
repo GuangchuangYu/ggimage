@@ -4,7 +4,6 @@
 \name{reexports}
 \alias{reexports}
 \alias{as.grob}
-\alias{reexports}
 \alias{as.ggplot}
 \title{Objects exported from other packages}
 \keyword{internal}

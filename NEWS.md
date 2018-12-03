@@ -1,3 +1,8 @@
+## ggimage 0.1.8
+
++ support `svg` file (2018-12-03, Mon)
+  - <https://github.com/GuangchuangYu/ggimage/issues/11>
+  
 ## ggimage 0.1.7
 
 + `geom_worldcup2018` layer (2018-06-19, Tue)
