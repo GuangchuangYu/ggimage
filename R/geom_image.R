@@ -103,6 +103,7 @@ GeomImage <- ggproto("GeomImage", Geom,
 
 ##' @importFrom magick image_read
 ##' @importFrom magick image_read_svg
+##' @importFrom magick image_read_pdf
 ##' @importFrom magick image_colorize
 ##' @importFrom grid rasterGrob
 ##' @importFrom grid viewport
@@ -114,6 +115,8 @@ imageGrob <- function(x, y, size, img, by, hjust, color, alpha, image_fun, angle
     if (!is(img, "magick-image")) {
         if (tools::file_ext(img) == "svg") {
             img <- image_read_svg(img)
+        } else if (tools::file_ext(img) == "pdf") {
+            img <- image_read_pdf(img)
         } else {
             img <- image_read(img)
         }
