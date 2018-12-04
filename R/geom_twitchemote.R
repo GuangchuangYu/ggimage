@@ -8,19 +8,23 @@
 ##' @author Brendan Rocks
 geom_twitchemote <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
                              na.rm=FALSE, by="width", ...) {
-  geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., .fun = twitchemote)
+    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., .fun = twitchemote)
 }
 
 twitchemote <- function(twitchemotes) {
-  # Obtain a list mapping emote text to emote ids
-  emote_list <- jsonlite::fromJSON("https://twitchemotes.com/api_cache/v3/global.json")
+    emote_lookup <- list.twitchemote()
+    emote_ids <- emote_lookup[twitchemotes]
 
-  # Make all keys lower-case
-  names(emote_list) <- tolower(names(emote_list))
-  emote_lookup <- unlist(lapply(emote_list, function(x) x$id))
+    ## Return a URL for the emote itself
+    paste0("https://static-cdn.jtvnw.net/emoticons/v1/", emote_ids, "/5.0")
+}
 
-  emote_ids <- emote_lookup[twitchemotes]
+##' @importFrom jsonlite fromJSON
+list.twitchemote <- function() {
+    ## Obtain a list mapping emote text to emote ids
+    emote_list <- jsonlite::fromJSON("https://twitchemotes.com/api_cache/v3/global.json")
 
-  # Return a URL for the emote itself
-  paste0("https://static-cdn.jtvnw.net/emoticons/v1/", emote_ids, "/5.0")
+    ## Make all keys lower-case
+    names(emote_list) <- tolower(names(emote_list))
+    unlist(lapply(emote_list, function(x) x$id))
 }

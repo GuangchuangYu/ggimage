@@ -14,6 +14,7 @@ Imports:
     ggplotify,
     grid,
     gridGraphics,
+    jsonlite,
     magick,
     methods,
     rvcheck (>= 0.1.0),
