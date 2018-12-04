@@ -117,3 +117,23 @@ df <- data_frame(x = sample(2:9),
 p <- ggplot(data=data.frame(x=c(0, 10), y=c(0, 10)), aes(x, y))+geom_blank()
 p + geom_subview(aes(x=x, y=y, subview=pie, width=width, height=width), data=df)
 ```
+
+# geom_twitchemote
+
+```{r}
+set.seed(1)
+x <- 1:10
+y <- x + rnorm(10, sd = 1)
+notlikethis <- data.frame(x = x, y = y)
+n_pals      <- 200
+pals        <- data.frame(
+  x = runif(n_pals, -2, 12), y = runif(n_pals, -2, 12),
+  pal = sample(c("wutface", "kappa", "pogchamp"), size = n_pals, replace = TRUE)
+)
+
+ggplot(notlikethis, aes(x = x, y = y)) +
+  geom_twitchemote(data = pals,
+                   aes(image = 'pogchamp'), size = 0.03, alpha = 0.3) +
+  geom_twitchemote(aes(image = 'notlikethis'), size = 0.15) +
+  geom_smooth()
+```
