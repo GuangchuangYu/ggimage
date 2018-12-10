@@ -6,7 +6,7 @@
 \usage{
 geom_image(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", inherit.aes = TRUE, na.rm = FALSE,
-  by = "width", colour = NULL, nudge_x = 0, angle = 0, ...)
+  by = "width", nudge_x = 0, angle = 0, ...)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -22,8 +22,6 @@ geom_image(mapping = NULL, data = NULL, stat = "identity",
 \item{na.rm}{logical, whether remove NA values}
 
 \item{by}{one of 'width' or 'height'}
-
-\item{colour}{specify the colour of image. NULL for original colour}
 
 \item{nudge_x}{horizontal adjustment to nudge image}
 

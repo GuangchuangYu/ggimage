@@ -14,7 +14,6 @@ geom_ggtree_image <- function() {
 ##' @param inherit.aes logical, whether inherit aes from ggplot()
 ##' @param na.rm logical, whether remove NA values
 ##' @param by one of 'width' or 'height'
-##' @param colour specify the colour of image. NULL for original colour
 ##' @param nudge_x horizontal adjustment to nudge image
 ##' @param angle angle of image
 ##' @param ... additional parameters
@@ -35,7 +34,7 @@ geom_ggtree_image <- function() {
 ##' @author guangchuang yu
 geom_image <- function(mapping=NULL, data=NULL, stat="identity",
                        position="identity", inherit.aes=TRUE,
-                       na.rm=FALSE, by="width", colour=NULL, nudge_x = 0, angle = 0, ...) {
+                       na.rm=FALSE, by="width", nudge_x = 0, angle = 0, ...) {
 
     by <- match.arg(by, c("width", "height"))
 
@@ -50,7 +49,6 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
         params = list(
             na.rm = na.rm,
             by = by,
-            image_colour = colour,
             nudge_x = nudge_x,
             angle = angle,
             ...),
@@ -72,12 +70,15 @@ GeomImage <- ggproto("GeomImage", Geom,
                          data[which(data$subset),]
                      },
 
-                     draw_panel = function(data, panel_scales, coord, by, na.rm=FALSE,
-                                           image_colour=NULL, alpha=1, .fun = NULL, height, image_fun = NULL,
+                     default_aes = aes(image="https://www.r-project.org/logo/Rlogo.png",
+                                       size=0.05, colour = NULL),
+
+                     draw_panel = function(data, panel_params, coord, by, na.rm=FALSE,
+                                           alpha=1, .fun = NULL, height, image_fun = NULL,
                                            hjust=0.5, angle = 0, nudge_x = 0, nudge_y = 0, asp=1) {
                          data$x <- data$x + nudge_x
                          data$y <- data$y + nudge_y
-                         data <- coord$transform(data, panel_scales)
+                         data <- coord$transform(data, panel_params)
 
 
                          if (!is.null(.fun) && is.function(.fun))
@@ -87,7 +88,21 @@ GeomImage <- ggproto("GeomImage", Geom,
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
                              data <- groups[[i]]
-                             imageGrob(data$x, data$y, data$size, imgs[i], by, hjust, image_colour, alpha, image_fun, angle, asp)
+                             if (is.null(data$colour) || length(unique(data$colour)) == 1) {
+                                 tmpgrobs <- imageGrob(data$x, data$y, data$size, imgs[i], by, hjust,
+                                                       data$colour, alpha, image_fun, angle, asp)
+                             } else {
+                                 groups2 <- split(data, factor(data$colour))
+                                 tmpgrobs <- lapply(seq_along(groups2), function(i) {
+                                     data <- groups2[[i]]
+                                     imageGrob(data$x, data$y, data$size, data$image[1], by, hjust,
+                                               data$colour, alpha, image_fun, angle, asp)
+                                 })
+                                 class(tmpgrobs) <- "gList"
+                                 tmpgrobs <- gTree(children = tmpgrobs, name = "tmpgrobs")
+                             }
+
+                             return(tmpgrobs)
                          })
                          class(grobs) <- "gList"
 
@@ -96,9 +111,9 @@ GeomImage <- ggproto("GeomImage", Geom,
                      },
                      non_missing_aes = c("size", "image"),
                      required_aes = c("x", "y"),
-                     default_aes = aes(size=0.05, image="https://www.r-project.org/logo/Rlogo.png"),
                      draw_key = draw_key_blank ## need to write the `draw_key_image` function.
                      )
+
 
 
 ##' @importFrom magick image_read

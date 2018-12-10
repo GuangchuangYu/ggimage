@@ -25,7 +25,9 @@ Suggests:
     ape,
     ggtree (>= 1.10.1),
     knitr,
-    prettydoc
+    prettydoc,
+    rsvg,
+    stringi
 VignetteBuilder: knitr
 ByteCompile: true
 License: Artistic-2.0

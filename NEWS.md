@@ -1,3 +1,8 @@
+## ggimage 0.1.9
+
++ support `aes(color)` (2018-12-10, Mon)
++ compatible with ggplot2 v3.1.0
+
 ## ggimage 0.1.8
 
 + support `pdf` file (2018-12-03, Mon)
