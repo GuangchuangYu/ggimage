@@ -1,4 +1,4 @@
-## ggimage 0.1.9
+## ggimage 0.2.0
 
 + `draw_key_image` that draws key of image colors using `rectGrob` (2018-12-10, Mon)
 + support `aes(color)` 

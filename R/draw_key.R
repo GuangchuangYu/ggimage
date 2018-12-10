@@ -14,6 +14,7 @@ NULL
 ##' @rdname draw_key
 ##' @importFrom grid rectGrob
 ##' @importFrom grid gpar
+##' @importFrom scales alpha
 ##' @export
 draw_key_image <- function(data, params, size) {
     rectGrob(gp = gpar(
