@@ -111,9 +111,8 @@ GeomImage <- ggproto("GeomImage", Geom,
                      },
                      non_missing_aes = c("size", "image"),
                      required_aes = c("x", "y"),
-                     draw_key = draw_key_blank ## need to write the `draw_key_image` function.
+                     draw_key = draw_key_image ## draw_key_blank ## need to write the `draw_key_image` function.
                      )
-
 
 
 ##' @importFrom magick image_read
