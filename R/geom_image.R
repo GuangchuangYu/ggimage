@@ -15,7 +15,6 @@ geom_ggtree_image <- function() {
 ##' @param na.rm logical, whether remove NA values
 ##' @param by one of 'width' or 'height'
 ##' @param nudge_x horizontal adjustment to nudge image
-##' @param angle angle of image
 ##' @param ... additional parameters
 ##' @return geom layer
 ##' @importFrom ggplot2 layer
@@ -34,7 +33,7 @@ geom_ggtree_image <- function() {
 ##' @author guangchuang yu
 geom_image <- function(mapping=NULL, data=NULL, stat="identity",
                        position="identity", inherit.aes=TRUE,
-                       na.rm=FALSE, by="width", nudge_x = 0, angle = 0, ...) {
+                       na.rm=FALSE, by="width", nudge_x = 0, ...) {
 
     by <- match.arg(by, c("width", "height"))
 
@@ -50,7 +49,7 @@ geom_image <- function(mapping=NULL, data=NULL, stat="identity",
             na.rm = na.rm,
             by = by,
             nudge_x = nudge_x,
-            angle = angle,
+            ##angle = angle,
             ...),
         check.aes = FALSE
     )
@@ -70,16 +69,15 @@ GeomImage <- ggproto("GeomImage", Geom,
                          data[which(data$subset),]
                      },
 
-                     default_aes = aes(image="https://www.r-project.org/logo/Rlogo.png",
-                                       size=0.05, colour = NULL),
+                     default_aes = aes(image=system.file("extdata/Rlogo.png", package="ggimage"), 
+                                       size=0.05, colour = NULL, angle = 0),
 
                      draw_panel = function(data, panel_params, coord, by, na.rm=FALSE,
-                                           alpha=1, .fun = NULL, height, image_fun = NULL,
-                                           hjust=0.5, angle = 0, nudge_x = 0, nudge_y = 0, asp=1) {
+                                           .fun = NULL, height, image_fun = NULL,
+                                           hjust=0.5, nudge_x = 0, nudge_y = 0, asp=1) {
                          data$x <- data$x + nudge_x
                          data$y <- data$y + nudge_y
                          data <- coord$transform(data, panel_params)
-
 
                          if (!is.null(.fun) && is.function(.fun))
                              data$image <- .fun(data$image)
@@ -87,27 +85,15 @@ GeomImage <- ggproto("GeomImage", Geom,
                          groups <- split(data, factor(data$image))
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
-                             data <- groups[[i]]
-                             if (is.null(data$colour) || length(unique(data$colour)) == 1) {
-                                 tmpgrobs <- imageGrob(data$x, data$y, data$size, imgs[i], by, hjust,
-                                                       data$colour, alpha, image_fun, angle, asp)
-                             } else {
-                                 groups2 <- split(data, factor(data$colour))
-                                 tmpgrobs <- lapply(seq_along(groups2), function(i) {
-                                     data <- groups2[[i]]
-                                     imageGrob(data$x, data$y, data$size, data$image[1], by, hjust,
-                                               data$colour, alpha, image_fun, angle, asp)
-                                 })
-                                 class(tmpgrobs) <- "gList"
-                                 tmpgrobs <- gTree(children = tmpgrobs, name = "tmpgrobs")
-                             }
-
-                             return(tmpgrobs)
+                             d <- groups[[i]]
+                             imageGrob(d$x, d$y, d$size, imgs[i], by, hjust,
+                                       d$colour, d$alpha, image_fun, d$angle, asp)
                          })
+                         grobs <- do.call("c", grobs)
                          class(grobs) <- "gList"
-
-                         ggplot2:::ggname("geom_image",
-                                          gTree(children = grobs))
+                         
+                         ggname("geom_image",
+                                gTree(children = grobs))
                      },
                      non_missing_aes = c("size", "image"),
                      required_aes = c("x", "y"),
@@ -118,7 +104,8 @@ GeomImage <- ggproto("GeomImage", Geom,
 ##' @importFrom magick image_read
 ##' @importFrom magick image_read_svg
 ##' @importFrom magick image_read_pdf
-##' @importFrom magick image_colorize
+##' @importFrom magick image_transparent
+##' @importFrom magick image_rotate
 ##' @importFrom grid rasterGrob
 ##' @importFrom grid viewport
 ##' @importFrom grDevices rgb
@@ -162,28 +149,39 @@ imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angl
         img <- image_fun(img)
     }
 
-    if (!is.null(colour) || alpha != 1) {
-        bitmap <- img[[1]]
-        if (!is.null(colour)) {
-            col <- col2rgb(colour)
-            bitmap[1,,] <- as.raw(col[1])
-            bitmap[2,,] <- as.raw(col[2])
-            bitmap[3,,] <- as.raw(col[3])
-        }
-
-        if (alpha != 1)
-            bitmap[4,,] <- as.raw(as.integer(bitmap[4,,]) * alpha)
-        img <- image_read(bitmap)
+    if (is.null(colour)) {
+        grobs <- list()
+        grobs[[1]] <- rasterGrob(x = x,
+                                 y = y,
+                                 image = img,
+                                 default.units = unit,
+                                 height = height,
+                                 width = width,
+                                 interpolate = FALSE)
+    } else {
+        cimg <- lapply(seq_along(colour), function(i) {
+            color_image(img, colour[i], alpha[i])
+        })
+        
+        grobs <- lapply(seq_along(x), function(i) {
+            img <- cimg[[i]]
+            if (angle[i] != 0) {
+                img <- image_rotate(img, angle[i])
+                img <- image_transparent(img, "white")
+            }
+            rasterGrob(x = x[i],
+                       y = y[i],
+                       image = img,
+                       default.units = unit,
+                       height = height,
+                       width = width,
+                       interpolate = FALSE
+                       ## gp = gpar(rot = angle[i])
+                       ## vp = viewport(angle=angle[i])
+                       )
+        })
     }
-
-    rasterGrob(x = x,
-               y = y,
-               image = img,
-               default.units = unit,
-               height = height,
-               width = width,
-               interpolate = FALSE,
-               vp = viewport(angle=angle))
+    return(grobs)
 }
 
 

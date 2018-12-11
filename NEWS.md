@@ -1,3 +1,8 @@
+## ggimage 0.2.1
+
++ three optional image color legend key (2018-12-11, Tue)
+  - <https://github.com/GuangchuangYu/ggimage/issues/18>
+
 ## ggimage 0.2.0
 
 + `draw_key_image` that draws key of image colors using `rectGrob` (2018-12-10, Mon)
