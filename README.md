@@ -20,8 +20,8 @@ School of Basic Medical Sciences, Southern Medical
 University
 
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/GuangchuangYu)
-[![](https://img.shields.io/badge/follow%20me%20on-寰俊-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg)
-[![](https://img.shields.io/badge/鎵撹祻-鏀粯瀹?/寰俊-green.svg)](https://guangchuangyu.github.io/blog_images/pay_qrcode.png)
+[![](https://img.shields.io/badge/follow%20me%20on-微信-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg)
+[![](https://img.shields.io/badge/打赏-支付宝/微信-green.svg)](https://guangchuangyu.github.io/blog_images/pay_qrcode.png)
 
 ## Installation
 
