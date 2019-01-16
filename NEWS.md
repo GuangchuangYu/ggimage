@@ -1,5 +1,12 @@
 ## ggimage 0.2.1
 
++ `phylopic` now check the id by `phylopic_valid_id` (2019-01-16, Wed)
++ `phylopic_valid_id` check whether a silhouette image is exist
+  - if not exist, then use `supertaxa`
+  - if supertaxa is also not exist, use `subtaxa`
+  - if subtaxa is also not exist, use `other` related taxa
+  - otherwise, return NA
++ `phylopic_uid` supports querying phylopic uid from scientific name
 + three optional image color legend key (2018-12-11, Tue)
   - <https://github.com/GuangchuangYu/ggimage/issues/18>
 

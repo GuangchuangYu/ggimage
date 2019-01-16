@@ -2,7 +2,7 @@
 title: "ggimage introduction"
 author: "Guangchuang Yu\\
 
-        School of Public Health, The University of Hong Kong"
+        School of Basic Medical Sciences, Southern Medical University"
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
@@ -78,10 +78,8 @@ ggplot(iris2, aes(x = Sepal.Length, y = Petal.Length)) +
 
 # geom_phylopic
 
-```{r}
-ggplot(d, aes(x, y)) + geom_phylopic(image = "500bd7c6-71c1-4b86-8e54-55f72ad1beca", size = .1) +
-    geom_phylopic(image="0174801d-15a6-4668-bfe0-4c421fbe51e8", size=Inf, alpha=.6, color='steelblue')
-```
+Please visit <https://yulab-smu.github.io/treedata-book/chapter8.html#phylopic> for more details.
+
 
 # geom_flag
 

@@ -70,7 +70,7 @@ GeomImage <- ggproto("GeomImage", Geom,
                      },
 
                      default_aes = aes(image=system.file("extdata/Rlogo.png", package="ggimage"), 
-                                       size=0.05, colour = NULL, angle = 0),
+                                       size=0.05, colour = NULL, angle = 0, alpha=1),
 
                      draw_panel = function(data, panel_params, coord, by, na.rm=FALSE,
                                            .fun = NULL, height, image_fun = NULL,
