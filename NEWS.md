@@ -1,3 +1,7 @@
+## ggimage 0.2.2
+
++ `geom_bgimage` (2019-08-05, Mon)
+
 ## ggimage 0.2.1
 
 + `phylopic` now check the id by `phylopic_valid_id` (2019-01-16, Wed)
