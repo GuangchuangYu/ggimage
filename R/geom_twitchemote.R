@@ -16,7 +16,7 @@ twitchemote <- function(twitchemotes) {
     emote_ids <- emote_lookup[twitchemotes]
 
     ## Return a URL for the emote itself
-    paste0("https://static-cdn.jtvnw.net/emoticons/v1/", emote_ids, "/5.0")
+    paste0("https://static-cdn.jtvnw.net/emoticons/v1/", emote_ids, "/1.0")
 }
 
 ##' @importFrom jsonlite fromJSON
