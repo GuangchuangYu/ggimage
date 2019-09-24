@@ -95,10 +95,14 @@ p + geom_flag(y = -2, aes(image = code)) +
 
 # geom_icon
 
+
+
 ```{r}
 d$icon=sample(c('ios-power', 'ios-wifi', 'ios-pie'), 10, replace=TRUE)
 ggplot(d, aes(x,y)) + geom_icon(aes(image=icon))
 ```
+
+see also <https://ionicons.com/>.
 
 # geom_subview
 
