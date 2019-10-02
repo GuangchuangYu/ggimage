@@ -1,3 +1,8 @@
+## ggimage 0.2.4
+
++ fixed image aspect ratio (2019-10-02, Wed)
+  - <https://stackoverflow.com/questions/58165226/is-it-possible-to-plot-images-in-a-ggplot2-plot-that-dont-get-distorted-when-y?noredirect=1#comment102713437_58165226>
+  
 ## ggimage 0.2.3
 
 + update ionicons url (2019-09-23, Mon)

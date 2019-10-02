@@ -1,6 +1,6 @@
 Package: ggimage
 Title: Use Image in 'ggplot2'
-Version: 0.2.3
+Version: 0.2.4
 Authors@R: person("Guangchuang", "Yu",
                   email = "guangchuangyu@gmail.com",
                   role = c("aut", "cre"),
