@@ -26,8 +26,7 @@ Suggests:
     gridGraphics,
     knitr,
     prettydoc,
-    rsvg,
-    stringi
+    rsvg
 VignetteBuilder: knitr
 ByteCompile: true
 License: Artistic-2.0
