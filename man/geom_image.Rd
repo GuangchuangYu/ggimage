@@ -46,5 +46,5 @@ d <- data.frame(x = rnorm(10),
 ggplot(d, aes(x, y)) + geom_image(aes(image=image))
 }
 \author{
-guangchuang yu
+Guangchuang Yu
 }

@@ -6,7 +6,7 @@
 ##' @param height size (by height) of phylopic image to be used
 ##' @return ggplot2 layer
 ##' @export
-##' @author guangchuang yu
+##' @author Guangchuang Yu
 geom_phylopic <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
                        na.rm=FALSE, by="width", height = 512, ...) {
     geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., height = height, .fun = phylopic)
@@ -19,13 +19,19 @@ phylopic <- function(id, height=512) {
 }
 
 phylopic_valid_id <- function(id) {
-    sapply(id, phylopic_valid_id_item)
+    res <- vapply(id, phylopic_valid_id_item, character(1))
+    i <- which(res == "")
+    res[i] <- id[i]
+    return(res)
 }
 
 phylopic_valid_id_item <- function(id) {
     url <- paste0("http://phylopic.org/api/a/name/", id,
                   "/images?subtaxa=true&supertaxa=true&options=pngFiles+canoicalName+json")
-    res <- jsonlite::fromJSON(url)$result
+    res <- tryCatch(jsonlite::fromJSON(url)$result,
+                    error = function(e) return(NULL))
+    if (is.null(res)) return("")
+
     if (length(res$same) > 0) {
         taxa <- res$same
     } else if (length(res$supertaxa) > 0) {
@@ -35,7 +41,7 @@ phylopic_valid_id_item <- function(id) {
     } else if (length(res$other) > 0) {
         taxa <- res$other
     } else {
-        return(NA)
+        return("")
     }
 
     uid <- taxa$uid[1]

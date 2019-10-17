@@ -29,5 +29,5 @@ ggplot2 layer
 geom layer for using phylopic image
 }
 \author{
-guangchuang yu
+Guangchuang Yu
 }

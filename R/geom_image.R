@@ -30,7 +30,7 @@ geom_ggtree_image <- function() {
 ##'                               size=10, replace = TRUE)
 ##'                )
 ##' ggplot(d, aes(x, y)) + geom_image(aes(image=image))
-##' @author guangchuang yu
+##' @author Guangchuang Yu
 geom_image <- function(mapping=NULL, data=NULL, stat="identity",
                        position="identity", inherit.aes=TRUE,
                        na.rm=FALSE, by="width", nudge_x = 0, ...) {
@@ -79,8 +79,10 @@ GeomImage <- ggproto("GeomImage", Geom,
                          data$y <- data$y + nudge_y
                          data <- coord$transform(data, panel_params)
 
-                         if (!is.null(.fun) && is.function(.fun))
+                         if (!is.null(.fun) && is.function(.fun)) {
                              data$image <- .fun(data$image)
+                         }
+
 
                          groups <- split(data, factor(data$image))
                          imgs <- names(groups)
