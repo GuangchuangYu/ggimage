@@ -12,7 +12,7 @@ geom_flag <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
 }
 
 flag <- function(flag) {
-    paste0('https://behdad.github.io/region-flags/png/', flag, ".png")
+    paste0('https://behdad.github.io/region-flags/png/', toupper(flag), ".png")
 }
 
 
