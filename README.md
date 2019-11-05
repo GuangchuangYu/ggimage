@@ -12,7 +12,7 @@
 Supports image files and graphic objects to be visualized in ‘ggplot2’
 graphic system.
 
-## Authors
+## :writing\_hand: Authors
 
 Guangchuang YU <https://guangchuangyu.github.io>
 
@@ -21,7 +21,7 @@ School of Basic Medical Sciences, Southern Medical University
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/GuangchuangYu)
 [![](https://img.shields.io/badge/follow%20me%20on-WeChat-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg)
 
-## Installation
+## :arrow\_double\_down: Installation
 
 Get the released version from CRAN:
 
@@ -39,7 +39,7 @@ setRepositories(ind=1:2)
 devtools::install_github("GuangchuangYu/ggimage")
 ```
 
-## Vignette
+## :book: Vignette
 
 For more details, please refer to the [online
 vignette](https://cran.r-project.org/package=ggimage/vignettes/ggimage.html).

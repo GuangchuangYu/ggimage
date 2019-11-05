@@ -21,7 +21,7 @@ html_preview: false
 Supports image files and graphic objects to be visualized in 'ggplot2' graphic system.
 
 
-## Authors
+## :writing_hand: Authors
 
 Guangchuang YU <https://guangchuangyu.github.io>
 
@@ -32,7 +32,7 @@ School of Basic Medical Sciences, Southern Medical University
 
 
 
-## Installation
+## :arrow_double_down: Installation
 
 Get the released version from CRAN:
 
@@ -50,6 +50,6 @@ setRepositories(ind=1:2)
 devtools::install_github("GuangchuangYu/ggimage")
 ```
 
-## Vignette
+## :book: Vignette
 
 For more details, please refer to the [online vignette](https://cran.r-project.org/package=ggimage/vignettes/ggimage.html).
