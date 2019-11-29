@@ -14,14 +14,13 @@ geom_phylopic <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
 
 
 phylopic <- function(id, height=512) {
-    uid <- phylopic_valid_id(id)
-    paste0("http://phylopic.org/assets/images/submissions/", uid, ".", height, ".png")
+    paste0("http://phylopic.org/assets/images/submissions/", id, ".", height, ".png")
 }
 
 phylopic_valid_id <- function(id) {
     res <- vapply(id, phylopic_valid_id_item, character(1))
     i <- which(res == "")
-    res[i] <- id[i]
+    res[i] <- NA
     return(res)
 }
 
@@ -57,15 +56,17 @@ phylopic_valid_id_item <- function(id) {
 ##' @export
 ##' @author Guangchuang Yu
 phylopic_uid <- function(name) {
-    if (length(name) == 1) {
-        res <- phylopic_uid_item(name)
-    } else {
-        res <- lapply(name, phylopic_uid_item)
+    ## if (length(name) == 1) {
+    ##     res <- phylopic_uid_item(name)
+    ## } else {
+    ##     res <- lapply(name, phylopic_uid_item)
         
-        names(res) <- name
-        return(res)
-    }
+    ##     names(res) <- name
+    ##     return(res)
+    ## }
 
+    res <- data.frame(name = name,
+                      uid = vapply(name, phylopic_uid_item, character(1)))
     return(res)
 }
 
@@ -73,7 +74,19 @@ phylopic_uid_item <- function(name) {
     x <- gsub("[^a-zA-Z]+", "+", name)
     url <- paste0("http://phylopic.org/api/a/name/search?text=",
                   x, "&options=scientific+json")
-    jsonlite::fromJSON(url)$result[[1]]
+    res <- jsonlite::fromJSON(url)$result[[1]]
+
+    for (id in res$uid) {
+        uid <- phylopic_valid_id(id)
+        if (!is.na(uid))
+            break
+    }
+    return(uid)
+    ## uid <- phylopic_valid_id(res$uid)
+    ## i <- which(!is.na(uid))
+    ## res <- res[i, , drop = FALSE]
+    ## res$uid <- uid[i]
+    ## return(res)
 }
 
 

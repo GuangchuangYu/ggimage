@@ -1,7 +1,9 @@
 ## ggimage 0.2.5
 
++ `phylopic_uid` now return a data.frame (2019-11-29, Fri)
 + force flag to be uppercase (2019-1-04, Mon)
   - <https://github.com/GuangchuangYu/ggimage/issues/20>
+
 ## ggimage 0.2.4
 
 + bug fixed of checking phylopic ID (2019-10-17, Thu)
