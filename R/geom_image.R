@@ -1,6 +1,6 @@
-geom_ggtree_image <- function() {
+## geom_ggtree_image <- function() {
 
-}
+## }
 
 
 ##' geom layer for visualizing image files

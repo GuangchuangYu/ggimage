@@ -4,8 +4,14 @@
 \alias{geom_pokemon}
 \title{geom_pokemon}
 \usage{
-geom_pokemon(mapping = NULL, data = NULL, inherit.aes = TRUE,
-  na.rm = FALSE, by = "width", ...)
+geom_pokemon(
+  mapping = NULL,
+  data = NULL,
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}

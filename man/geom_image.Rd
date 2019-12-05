@@ -4,9 +4,17 @@
 \alias{geom_image}
 \title{geom_image}
 \usage{
-geom_image(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", inherit.aes = TRUE, na.rm = FALSE,
-  by = "width", nudge_x = 0, ...)
+geom_image(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  nudge_x = 0,
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}

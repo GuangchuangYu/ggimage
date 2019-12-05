@@ -4,8 +4,14 @@
 \alias{geom_icon}
 \title{geom_icon}
 \usage{
-geom_icon(mapping = NULL, data = NULL, inherit.aes = TRUE,
-  na.rm = FALSE, by = "width", ...)
+geom_icon(
+  mapping = NULL,
+  data = NULL,
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}

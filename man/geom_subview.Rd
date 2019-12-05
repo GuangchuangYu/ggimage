@@ -4,8 +4,15 @@
 \alias{geom_subview}
 \title{geom_subview}
 \usage{
-geom_subview(mapping = NULL, data = NULL, width = 0.1,
-  height = 0.1, x = NULL, y = NULL, subview = NULL)
+geom_subview(
+  mapping = NULL,
+  data = NULL,
+  width = 0.1,
+  height = 0.1,
+  x = NULL,
+  y = NULL,
+  subview = NULL
+)
 }
 \arguments{
 \item{mapping}{aes mapping, requires 'x', 'y' and 'subview'}

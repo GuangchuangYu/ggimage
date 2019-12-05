@@ -4,8 +4,14 @@
 \alias{geom_phylopic}
 \title{geom_phylopic}
 \usage{
-geom_phylopic(mapping = NULL, data = NULL, inherit.aes = TRUE,
-  na.rm = FALSE, by = "width", height = 512, ...)
+geom_phylopic(
+  mapping = NULL,
+  data = NULL,
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}
@@ -17,8 +23,6 @@ geom_phylopic(mapping = NULL, data = NULL, inherit.aes = TRUE,
 \item{na.rm}{whether remove NA values}
 
 \item{by}{one of 'width' or 'height' for specifying size}
-
-\item{height}{size (by height) of phylopic image to be used}
 
 \item{...}{additional parameter}
 }

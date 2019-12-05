@@ -4,8 +4,14 @@
 \alias{geom_worldcup2018}
 \title{geom_worldcup2018}
 \usage{
-geom_worldcup2018(mapping = NULL, data = NULL, inherit.aes = TRUE,
-  na.rm = FALSE, by = "width", ...)
+geom_worldcup2018(
+  mapping = NULL,
+  data = NULL,
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}

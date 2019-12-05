@@ -3,18 +3,20 @@
 ##'
 ##' @title geom_phylopic
 ##' @inheritParams geom_pokemon
-##' @param height size (by height) of phylopic image to be used
 ##' @return ggplot2 layer
 ##' @export
 ##' @author Guangchuang Yu
 geom_phylopic <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
-                       na.rm=FALSE, by="width", height = 512, ...) {
-    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., height = height, .fun = phylopic)
+                       na.rm=FALSE, by="width", ...) {
+    geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., .fun = phylopic)
 }
 
 
-phylopic <- function(id, height=512) {
-    paste0("http://phylopic.org/assets/images/submissions/", id, ".", height, ".png")
+phylopic <- function(id) {
+    width <- getOption("phylopic_width")
+    if (is.null(width))
+        width <- 256
+    paste0("http://phylopic.org/assets/images/submissions/", id, ".", width, ".png")
 }
 
 phylopic_valid_id <- function(id) {

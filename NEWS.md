@@ -1,3 +1,9 @@
+
+## ggimage 0.2.6
+
++ change default image width to 256 for phylopic and it can be set to other values by e.g. `options(phylopic_width=512)` (2019-12-05, Thu)
+  - <https://github.com/YuLab-SMU/treedata-book/issues/1>
+  
 ## ggimage 0.2.5
 
 + `phylopic_uid` now return a data.frame (2019-11-29, Fri)

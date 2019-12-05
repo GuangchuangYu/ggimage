@@ -4,8 +4,14 @@
 \alias{geom_flag}
 \title{geom_flag}
 \usage{
-geom_flag(mapping = NULL, data = NULL, inherit.aes = TRUE,
-  na.rm = FALSE, by = "width", ...)
+geom_flag(
+  mapping = NULL,
+  data = NULL,
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}

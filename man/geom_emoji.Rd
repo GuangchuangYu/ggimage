@@ -4,8 +4,14 @@
 \alias{geom_emoji}
 \title{geom_emoji}
 \usage{
-geom_emoji(mapping = NULL, data = NULL, inherit.aes = TRUE,
-  na.rm = FALSE, by = "width", ...)
+geom_emoji(
+  mapping = NULL,
+  data = NULL,
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}

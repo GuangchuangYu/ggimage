@@ -4,8 +4,14 @@
 \alias{geom_twitchemote}
 \title{geom_twitchemotes}
 \usage{
-geom_twitchemote(mapping = NULL, data = NULL, inherit.aes = TRUE,
-  na.rm = FALSE, by = "width", ...)
+geom_twitchemote(
+  mapping = NULL,
+  data = NULL,
+  inherit.aes = TRUE,
+  na.rm = FALSE,
+  by = "width",
+  ...
+)
 }
 \arguments{
 \item{mapping}{aes mapping}
