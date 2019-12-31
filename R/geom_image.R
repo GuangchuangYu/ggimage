@@ -82,12 +82,14 @@ GeomImage <- ggproto("GeomImage", Geom,
                          if (!is.null(.fun) && is.function(.fun)) {
                              data$image <- .fun(data$image)
                          }
-
+                         if (is.null(data$image)) return(NULL)
 
                          groups <- split(data, factor(data$image))
                          imgs <- names(groups)
                          grobs <- lapply(seq_along(groups), function(i) {
                              d <- groups[[i]]
+                             if (is.na(imgs[i])) return(zeroGrob())
+
                              imageGrob(d$x, d$y, d$size, imgs[i], by, hjust,
                                        d$colour, d$alpha, image_fun, d$angle, asp)
                          })
@@ -152,6 +154,7 @@ imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angl
         img <- image_fun(img)
     }
 
+
     if (is.null(colour)) {
         grobs <- list()
         grobs[[1]] <- rasterGrob(x = x,
@@ -203,7 +206,11 @@ makeContent.fixasp_raster <- function(x) {
         h <- convertHeight(y$height, "cm", valueOnly = TRUE)
         w <- convertWidth(y$width, "cm", valueOnly = TRUE)
         ## Decide how the units should be equal
-        y$width <- y$height <- unit(sqrt(h * w), "cm")
+        y$width <- y$height <- unit(sqrt(h*w), "cm")
+        ## y$width <- unit(sqrt(h * w), "cm")
+        ## y$height <- unit(sqrt(h * w), "cm")
+        ## y$width <- unit(w, "cm")
+        ## y$height <- unit(h, "cm")
         x$children[[i]] <- y
     }
     x

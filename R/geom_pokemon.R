@@ -17,7 +17,9 @@ geom_pokemon <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
 }
 
 pokemon <- function(id) {
-    paste0('https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/emojis/', id, ".png")
+    url <- paste0('https://raw.githubusercontent.com/Templarian/slack-emoji-pokemon/master/emojis/', id, ".png")
+
+    check_url(url)
 }
 
 ##' list available pokemon
@@ -36,3 +38,5 @@ list.png <- function(url) {
     y <- x[grep("title=\"[a-zA-Z0-9\\-]+\\.png", x)]
     sub(".*title=\"([a-zA-Z0-9\\-]+)\\.png.*", '\\1', y)
 }
+
+

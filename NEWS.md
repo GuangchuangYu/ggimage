@@ -1,3 +1,7 @@
+## ggimage 0.2.7
+
++ handle with online image not available (2019-12-31, Tue)
++ vignette move to <https://guangchuangyu.github.io/pkgdocs/ggimage.html>
 
 ## ggimage 0.2.6
 

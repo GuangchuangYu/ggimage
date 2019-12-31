@@ -16,7 +16,9 @@ phylopic <- function(id) {
     width <- getOption("phylopic_width")
     if (is.null(width))
         width <- 256
-    paste0("http://phylopic.org/assets/images/submissions/", id, ".", width, ".png")
+    url <- paste0("http://phylopic.org/assets/images/submissions/", id, ".", width, ".png")
+
+    check_url(url)
 }
 
 phylopic_valid_id <- function(id) {

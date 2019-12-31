@@ -12,6 +12,8 @@ geom_emoji <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
 }
 
 emoji <- function(emoji) {
-    paste0('https://twemoji.maxcdn.com/72x72/', emoji, ".png")
+    url <- paste0('https://twemoji.maxcdn.com/72x72/', emoji, ".png")
+
+    check_url(url)
 }
 
