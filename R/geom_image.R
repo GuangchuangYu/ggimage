@@ -198,7 +198,7 @@ imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angl
 ##' @export
 makeContent.fixasp_raster <- function(x) {
     ## reference https://stackoverflow.com/questions/58165226/is-it-possible-to-plot-images-in-a-ggplot2-plot-that-dont-get-distorted-when-y?noredirect=1#comment102713437_58165226
-
+    ## and https://github.com/GuangchuangYu/ggimage/issues/19#issuecomment-572523516
     ## Convert from relative units to absolute units
     children <- x$children
     for (i in seq_along(children)) {
@@ -206,11 +206,10 @@ makeContent.fixasp_raster <- function(x) {
         h <- convertHeight(y$height, "cm", valueOnly = TRUE)
         w <- convertWidth(y$width, "cm", valueOnly = TRUE)
         ## Decide how the units should be equal
-        y$width <- y$height <- unit(sqrt(h*w), "cm")
-        ## y$width <- unit(sqrt(h * w), "cm")
-        ## y$height <- unit(sqrt(h * w), "cm")
-        ## y$width <- unit(w, "cm")
-        ## y$height <- unit(h, "cm")
+        ## y$width <- y$height <- unit(sqrt(h*w), "cm")
+
+        y$width <- unit(w, "cm")
+        y$height <- unit(h, "cm")
         x$children[[i]] <- y
     }
     x

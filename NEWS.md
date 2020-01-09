@@ -1,3 +1,7 @@
+## ggimage 0.2.8
+
++ fixing aspect ratio of images (2020-01-09, Thu)
+
 ## ggimage 0.2.7
 
 + handle with online image not available (2019-12-31, Tue)
