@@ -12,13 +12,13 @@
 ##' @return layer
 ##' @importFrom ggplot2 annotation_custom
 ##' @importFrom ggplot2 aes_
-##' @importFrom tibble as_data_frame
+##' @importFrom tibble as_tibble
+##' @importFrom tibble tibble
 ##' @importFrom ggplotify as.grob
 ##' @importFrom rvcheck get_aes_var
 ## @importFrom grid convertUnit
 ## @importFrom grid viewport
 ## @importFrom grid pushViewport
-##' @importFrom tibble data_frame
 ##' @export
 ##' @author guangchuang yu
 geom_subview <- function(mapping = NULL, data = NULL, width=.1, height=.1, x = NULL, y = NULL, subview = NULL) {
@@ -28,9 +28,9 @@ geom_subview <- function(mapping = NULL, data = NULL, width=.1, height=.1, x = N
     ## this is a hack to support `aes` without `inherit.aes`. mapping and data must be provided.
 
     if (is.null(data)) {
-        data <- data_frame(x = x, y = y)
+        data <- tibble(x = x, y = y)
     } else if (!inherits(data, 'tbl')) {
-        data <- as_data_frame(data)
+        data <- as_tibble(data)
     }
 
     if (is.null(mapping)) {

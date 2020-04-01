@@ -1,5 +1,6 @@
 ## ggimage 0.2.8
 
++ import `as_tibble` and `tibble` as `as_data_frame` and `data_frame` were deprecated (2020-04-01, Wed)
 + fixing aspect ratio of images (2020-01-09, Thu)
 
 ## ggimage 0.2.7
