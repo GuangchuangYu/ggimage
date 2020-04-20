@@ -42,4 +42,4 @@ devtools::install_github("GuangchuangYu/ggimage")
 ## :book: Vignette
 
 For more details, please refer to the [online
-vignette](https://cran.r-project.org/package=ggimage/vignettes/ggimage.html).
+vignette](https://guangchuangyu.github.io/pkgdocs/ggimage.html).
