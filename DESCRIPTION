@@ -17,6 +17,7 @@ Imports:
     magick,
     methods,
     rvcheck (>= 0.1.0),
+    pdftools,
     scales,
     tibble,
     tools
