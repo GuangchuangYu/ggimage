@@ -78,8 +78,10 @@ phylopic_uid_item <- function(name) {
     x <- gsub("[^a-zA-Z]+", "+", name)
     url <- paste0("http://phylopic.org/api/a/name/search?text=",
                   x, "&options=scientific+json")
-    res <- jsonlite::fromJSON(url)$result[[1]]
-
+    #res <- jsonlite::fromJSON(url)$result[[1]]
+    res <- tryCatch(jsonlite::fromJSON(url)$result[[1]],
+                    error = function(e) return(NULL))
+    if (is.null(res)) return("") 
     for (id in res$uid) {
         uid <- phylopic_valid_id(id)
         if (!is.na(uid))
