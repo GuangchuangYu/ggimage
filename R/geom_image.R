@@ -20,6 +20,7 @@
 ##' @importFrom ggplot2 layer
 ##' @export
 ##' @examples
+##' \dontrun{
 ##' library("ggplot2")
 ##' library("ggimage")
 ##' set.seed(2017-02-21)
@@ -30,6 +31,7 @@
 ##'                               size=10, replace = TRUE)
 ##'                )
 ##' ggplot(d, aes(x, y)) + geom_image(aes(image=image))
+##' }
 ##' @author Guangchuang Yu
 geom_image <- function(mapping=NULL, data=NULL, stat="identity",
                        position="identity", inherit.aes=TRUE,

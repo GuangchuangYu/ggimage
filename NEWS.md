@@ -1,3 +1,7 @@
+## ggimage 0.2.9
+
++ import `ggfun` (2021-08-20, Fri)
+
 ## ggimage 0.2.8
 
 + import `as_tibble` and `tibble` as `as_data_frame` and `data_frame` were deprecated (2020-04-01, Wed)

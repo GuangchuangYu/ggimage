@@ -42,6 +42,7 @@ geom layer
 geom layer for visualizing image files
 }
 \examples{
+\dontrun{
 library("ggplot2")
 library("ggimage")
 set.seed(2017-02-21)
@@ -52,6 +53,7 @@ d <- data.frame(x = rnorm(10),
                               size=10, replace = TRUE)
                )
 ggplot(d, aes(x, y)) + geom_image(aes(image=image))
+}
 }
 \author{
 Guangchuang Yu
