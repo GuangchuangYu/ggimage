@@ -11,14 +11,45 @@ geom_phylopic <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
     geom_image(mapping, data, inherit.aes=inherit.aes, na.rm=na.rm, ..., .fun = phylopic)
 }
 
+##' download phylopic images
+##'
+##'
+##' This function allows users to download phylopic images using phylopic id
+##' @title download_phylopic
+##' @param id phylopic id
+##' @param destdir directory where the downloaded images are to be saved.
+##' @param ... additional parameters passed to download.file
+##' @return a character string (or vector) with downloaded file path
+##' @importFrom utils download.file
+##' @export
+##' @author Guangchuang Yu
+download_phylopic <- function(id, destdir = ".", ...) {
+    url <- phylopic(id)
+    n <- basename(url)
+    destfile <- paste0(destdir, '/', n)
+
+    for (i in seq_along(url)) {
+        utils::download.file(url[i], destfile[i], ...)
+    }
+    invisible(destfile)
+}
 
 phylopic <- function(id) {
+    ## http://www.phylopic.org/assets/images/submissions/7fb9bea8-e758-4986-afb2-95a2c3bf983d.512.png
     width <- getOption("phylopic_width")
     if (is.null(width))
         width <- 256
-    url <- paste0("http://phylopic.org/assets/images/submissions/", id, ".", width, ".png")
 
-    check_url(url)
+    basepath <- getOption('phylopic_dir')
+    if (is.null(basepath)) {
+        basepath <- "http://phylopic.org/assets/images/submissions"
+    }         
+
+    url <- paste0(basepath, "/", id, ".", width, ".png")
+
+    if (is.null(basepath))
+        url <- check_url(url)
+    return(url)
 }
 
 phylopic_valid_id <- function(id) {

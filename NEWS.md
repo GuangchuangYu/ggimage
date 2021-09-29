@@ -1,3 +1,7 @@
+## ggimage 0.3.0
+
++ `download_phylopic` function (2021-09-29, Wed)
+
 ## ggimage 0.2.9
 
 + import `ggfun` (2021-08-20, Fri)

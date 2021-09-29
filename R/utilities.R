@@ -1,5 +1,16 @@
 url.exists <- function(url) {
-    identical(httr::status_code(httr::HEAD(url)), 200L)
+    x <- httr::status_code(httr::HEAD(url))
+    if (identical(x, 200L)) return(TRUE)
+    cnt <- 1
+    while (identical(x, 502L)) {
+        ## server not response
+        ## try again
+        x <- httr::status_code(httr::HEAD(url))
+        if (identical(x, 200L)) return(TRUE)
+        cnt <- cnt + 1
+        if (cnt > 10) break
+    }
+    return(FALSE)
 }
 
 check_url <- function(url) {
