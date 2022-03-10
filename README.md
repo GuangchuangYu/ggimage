@@ -2,7 +2,7 @@
 
 # ggimage: Use Image in ‘ggplot2’
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/ggimage?color=green)](https://cran.r-project.org/package=ggimage)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/ggimage?color=green)](https://cran.r-project.org/package=ggimage)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/ggimage?color=green)
 ![](http://cranlogs.r-pkg.org/badges/ggimage?color=green)
 ![](http://cranlogs.r-pkg.org/badges/last-week/ggimage?color=green)
@@ -12,7 +12,7 @@
 Supports image files and graphic objects to be visualized in ‘ggplot2’
 graphic system.
 
-## :writing\_hand: Authors
+## :writing_hand: Authors
 
 Guangchuang YU <https://guangchuangyu.github.io>
 
@@ -21,7 +21,7 @@ School of Basic Medical Sciences, Southern Medical University
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/GuangchuangYu)
 [![](https://img.shields.io/badge/follow%20me%20on-WeChat-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg)
 
-## :arrow\_double\_down: Installation
+## :arrow_double_down: Installation
 
 Get the released version from CRAN:
 
@@ -42,4 +42,4 @@ devtools::install_github("GuangchuangYu/ggimage")
 ## :book: Vignette
 
 For more details, please refer to the [online
-vignette](https://guangchuangyu.github.io/pkgdocs/ggimage.html).
+vignette](https://yulab-smu.top/pkgdocs/ggimage.html).
