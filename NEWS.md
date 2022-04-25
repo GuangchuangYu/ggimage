@@ -1,3 +1,7 @@
+## ggimage 0.3.1
+
++ update flag URL (2022-04-25, Mon, #39)
+
 ## ggimage 0.3.0
 
 + `download_phylopic` function (2021-09-29, Wed)
