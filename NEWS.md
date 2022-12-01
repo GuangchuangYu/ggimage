@@ -1,3 +1,7 @@
+## ggimage 0.3.1.001
+
++ `ggpreview()` to preview a plot if it was saved to a file (2022-12-01, Thu)
+
 ## ggimage 0.3.1
 
 + update flag URL (2022-04-25, Mon, #39)
