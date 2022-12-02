@@ -1,5 +1,7 @@
-## ggimage 0.3.1.001
+## ggimage 0.3.1.002
 
++ introduce 'filename' parameter in `ggpreview()` (2022-12-02, Fri)
++ `ggpreview()` works with `last_plot()` 
 + `ggpreview()` to preview a plot if it was saved to a file (2022-12-01, Thu)
 
 ## ggimage 0.3.1

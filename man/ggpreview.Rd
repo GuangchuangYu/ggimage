@@ -4,9 +4,18 @@
 \alias{ggpreview}
 \title{ggpreview}
 \usage{
-ggpreview(plot = last_plot(), width, height, units = "in")
+ggpreview(
+  filename = NULL,
+  plot = last_plot(),
+  width = NA,
+  height = NA,
+  units = "in",
+  ...
+)
 }
 \arguments{
+\item{filename}{If it is not NULL, the previewed figure will be save to the file}
+
 \item{plot}{any plot that supported by the 'ggplotify' package}
 
 \item{width}{width of the figure}
@@ -14,6 +23,8 @@ ggpreview(plot = last_plot(), width, height, units = "in")
 \item{height}{height of the figure}
 
 \item{units}{units of the 'width' and 'height'}
+
+\item{...}{additional parameters pass to ggsave() if filename is not NULL}
 }
 \value{
 a preview of the figure
