@@ -19,21 +19,20 @@
 ##' @author Guangchuang Yu
 ggpreview <- function(filename = NULL, plot = last_plot(), 
                     width = NA, height = NA, units = 'in', ...) {
-    f <- tempfile(fileext = '.png') 
+    if (is.null(filename)) {
+        filename <- tempfile(fileext = '.png') 
+    }
     
     if (!inherits(plot, 'gg')) {
         ## plot <- as.ggplot(plot)    
         plot <- as.grob(plot)    
     }
 
-    ggsave(filename = f, plot, width=width, height=height, units=units)
-    ## as.ggplot(image_read(f))
-    np <- as.grob(image_read(f))
+    ggsave(filename = filename, plot = plot, 
+        width = width, height = height, units = units, ...)
 
-    if (!is.null(filename)) {
-        ggsave(filename = filename, plot = np, 
-                width = width, height = height, units = units, ...)
-    }
+    ## as.ggplot(image_read(filename))
+    np <- as.grob(image_read(filename))
 
     grid.newpage()
     grid.draw(np)
