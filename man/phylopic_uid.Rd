@@ -4,10 +4,14 @@
 \alias{phylopic_uid}
 \title{phylopic_uid}
 \usage{
-phylopic_uid(name)
+phylopic_uid(name, seed = 123)
 }
 \arguments{
 \item{name}{scientific name}
+
+\item{seed}{The random seed to use to generate the same uid,
+because a name might have many uid, the function will extract one
+of them randomly, default is 123.}
 }
 \value{
 phylopic uid
