@@ -101,7 +101,7 @@ autocomplete_name <- function(name, ...){
 
 .autocomplete_name_search <- function(name, ...){
     x <- gsub("[^a-zA-Z]+", "%20", tolower(name))
-    url <- paste0('https://api.phylopic.org/autocomplete?build=182&query=', x)
+    url <- paste0('https://api.phylopic.org/autocomplete?query=', x)
     res <- suppressWarnings(tryCatch(jsonlite::fromJSON(url),
                     error = function(e) return(NULL)))
     if (is.null(res) || length(res$matches)==0){
@@ -180,7 +180,7 @@ phylopic_uid_item <- function(name, seed = 123, ...) {
     #              x, "&options=scientific+json")
     #res <- jsonlite::fromJSON(url)$result[[1]]
     nm <- gsub("[^a-zA-Z]+", "%20", tolower(name))
-    url <- paste0("https://api.phylopic.org/images?build=182&embed_items=true&filter_name=", nm,"&page=0")
+    url <- paste0("https://api.phylopic.org/images?embed_items=true&filter_name=", nm,"&page=0")
 
     res <- suppressWarnings(tryCatch(jsonlite::fromJSON(url),
                     error = function(e) return(NULL)))
