@@ -26,7 +26,7 @@ geom_phylopic <- function(mapping=NULL, data=NULL, inherit.aes=TRUE,
 download_phylopic <- function(id, destdir = ".", ...) {
     url <- phylopic(id)
     n <- basename(url)
-    destfile <- paste0(destdir, '/', n)
+    destfile <- paste0(destdir, '/', id, n)
 
     for (i in seq_along(url)) {
         utils::download.file(url[i], destfile[i], ...)
@@ -56,9 +56,8 @@ phylopic <- function(id) {
     }
 
     id <- .autocomplete_uid(x = id)
-
+    
     url <- paste0(basepath, id, "/vector.svg")
-
     if (is.null(basepath)){
         url <- check_url(url)
     }
@@ -71,17 +70,22 @@ phylopic <- function(id) {
 # is a 128-bit number. It has 32 alphanumeric characters in the
 # form of 8-4-4-4-12.
 .autocomplete_uid <- function(x){
-    x1 <- unlist(strsplit(x, split='-'))
-    flag1 <- length(x1) == 5
-    if (!flag1){
-        x <- phylopic_uid(name = x)$uid
-    }else{
-        flag2 <- all(nchar(x1) == c(8, 4, 4, 4, 12))
-        if (!flag2){
-            x <- phylopic_uid(name = x)$uid
+    x <- lapply(x, function(i){
+        x1 <- unlist(strsplit(i, split='-'))
+        flag1 <- length(x1) == 5
+        if (!flag1){
+            i <- phylopic_uid(name = i)$uid
+        }else{
+            flag2 <- all(nchar(x1) == c(8, 4, 4, 4, 12))
+            if (!flag2){
+                i <- phylopic_uid(name = i)$uid
+            }
         }
-    }
+        return(i)
+      }
+    ) |> unlist()
     return(x)
+    
 }
 
 
