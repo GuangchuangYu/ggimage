@@ -155,8 +155,8 @@ imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angl
     if (!is.null(image_fun)) {
         img <- image_fun(img)
     }
-
-
+    
+    
     if (is.null(colour)) {
         grobs <- list()
         grobs[[1]] <- rasterGrob(x = x,
@@ -167,12 +167,13 @@ imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angl
                                  width = width,
                                  interpolate = FALSE)
     } else {
-        cimg <- lapply(seq_along(colour), function(i) {
-            color_image(img, colour[i], alpha[i])
-        })
+        #cimg <- lapply(seq_along(colour), function(i) {
+        #    color_image(img, colour[i], alpha[i])
+        #})
         
         grobs <- lapply(seq_along(x), function(i) {
-            img <- cimg[[i]]
+            img <- color_image(img, colour[i], alpha[i])
+            #img <- cimg[[i]]
             if (angle[i] != 0) {
                 img <- image_rotate(img, angle[i])
                 img <- image_transparent(img, "white")
