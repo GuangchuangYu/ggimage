@@ -183,10 +183,19 @@ phylopic_uid_item <- function(name, seed = 123, ...) {
     #url <- paste0("http://phylopic.org/api/a/name/search?text=",
     #              x, "&options=scientific+json")
     #res <- jsonlite::fromJSON(url)$result[[1]]
-    nm <- gsub("[^a-zA-Z]+", "%20", tolower(name))
-    url <- paste0("https://api.phylopic.org/images?embed_items=true&filter_name=", nm,"&page=0")
+    
+    baseurl <- 'https://api.phylopic.org/images?'
 
-    res <- suppressWarnings(tryCatch(jsonlite::fromJSON(url),
+    nm <- gsub("[^a-zA-Z]+", "%20", tolower(name))
+
+    url1 <- paste0(baseurl, "filter_name=", nm)
+    
+    res <- suppressWarnings(tryCatch(jsonlite::fromJSON(url1), error = function(e)return(NULL)))
+
+    url2 <- paste0(baseurl, "embed_items=true&page=0&filter_name=", nm, "&build=", res$build)
+
+
+    res <- suppressWarnings(tryCatch(jsonlite::fromJSON(url2),
                     error = function(e) return(NULL)))
     if ("errors" %in% names(res) || is.null(res)){
         stop(paste0("Image resource of Phylopic database is not available for ", name, ". \n",
