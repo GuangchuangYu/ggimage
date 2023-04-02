@@ -1,3 +1,4 @@
+#' @importFrom magick image_convert
 color_image <- function(img, color, alpha = NULL) {
     if (is.null(color))
         return(img)
@@ -7,6 +8,9 @@ color_image <- function(img, color, alpha = NULL) {
     }
 
     bitmap <- img[[1]]
+    if (dim(bitmap)[1]==1){
+        bitmap <- image_convert(img, colorspace="rgb")[[1]]
+    }
     col <- col2rgb(color)
     bitmap[1,,] <- as.raw(col[1])
     bitmap[2,,] <- as.raw(col[2])
