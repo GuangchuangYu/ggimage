@@ -146,7 +146,7 @@ imageGrob <- function(x, y, size, img, colour, alpha, angle, adj, image_fun, hju
         asp <- getAR2(img)/asp
     }
 
-    if (any(size == Inf)) {
+    if (size == Inf) {
         x <- 0.5
         y <- 0.5
         width <- 1
@@ -177,12 +177,23 @@ imageGrob <- function(x, y, size, img, colour, alpha, angle, adj, image_fun, hju
         img <- color_image(img, colour, alpha)
     }
     
-    grob <- rasterGrob(x = x,
-                       y = y,
-                       image = img,
-                       default.units = default.units,
-                       height = height,
-                       )
+    if (size == Inf){
+       grob <- rasterGrob(x = x,
+                          y = y,
+                          image = img,
+                          default.units = default.units,
+                          height = height,
+                          width = width
+                          )
+    }else{
+       grob <- rasterGrob(
+                          x = x,
+                          y = y,
+                          image = img,
+                          default.units = default.units,
+                          height = height
+                       )        
+    }
     return(grob)
 }
 
