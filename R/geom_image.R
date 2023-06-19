@@ -86,20 +86,33 @@ GeomImage <- ggproto("GeomImage", Geom,
                          }
                          if (is.null(data$image)) return(NULL)
 
-                         groups <- split(data, factor(data$image))
-                         imgs <- names(groups)
-                         grobs <- lapply(seq_along(groups), function(i) {
-                             d <- groups[[i]]
-                             if (is.na(imgs[i])) return(zeroGrob())
+                         if (by=='height' && "y.range" %in% names(panel_params)) {
+                             adjs <- data$size / diff(panel_params$y.range)
+                         } else if (by == 'width' && "x.range" %in% names(panel_params)){
+                             adjs <- data$size / diff(panel_params$x.range)
+                         } else if ("r.range" %in% names(panel_params)) {
+                             adjs <- data$size / diff(panel_params$r.range)
+                         } else {
+                             adjs <- data$size
+                         }
+                         adjs[is.infinite(adjs)] <- 1
 
-                             imageGrob(d$x, d$y, d$size, imgs[i], by, hjust,
-                                       d$colour, d$alpha, image_fun, d$angle, asp)
-                         })
-                         grobs <- do.call("c", grobs)
-                         class(grobs) <- "gList"
-                         
-                         ggname("geom_image",
-                                gTree(children = grobs, cl = "fixasp_raster"))
+                         grobs <- lapply(seq_len(nrow(data)), function(i){
+                              imageGrob(x = data$x[i], 
+                                        y = data$y[i], 
+                                        size = data$size[i], 
+                                        img = data$image[i],
+                                        colour = data$colour[i],
+                                        alpha = data$alpha[i],
+                                        angle = data$angle[i],
+                                        adj = adjs[i],
+                                        image_fun = image_fun,
+                                        hjust = hjust,
+                                        by = by,
+                                        asp = asp
+                              )
+                             })
+                         ggname("geom_image", gTree(children = do.call(gList, grobs)))
                      },
                      non_missing_aes = c("size", "image"),
                      required_aes = c("x", "y"),
@@ -118,7 +131,10 @@ GeomImage <- ggproto("GeomImage", Geom,
 ##' @importFrom grDevices col2rgb
 ##' @importFrom methods is
 ##' @importFrom tools file_ext
-imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angle, asp=1) {
+imageGrob <- function(x, y, size, img, colour, alpha, angle, adj, image_fun, hjust, by, asp=1, default.units='native'){
+    if (is.na(img)){
+        return(zeroGrob())
+    }
     if (!is(img, "magick-image")) {
         if (tools::file_ext(img) == "svg") {
             img <- image_read_svg(img)
@@ -127,22 +143,19 @@ imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angl
         } else {
             img <- image_read(img)
         }
-
         asp <- getAR2(img)/asp
     }
 
-    unit <- "native"
-    if (any(size == Inf)) {
+    if (size == Inf) {
         x <- 0.5
         y <- 0.5
         width <- 1
         height <- 1
-        unit <- "npc"
     } else if (by == "width") {
-        width <- size
+        width <- size * adj
         height <- size / asp
     } else {
-        width <- size * asp
+        width <- size * asp * adj
         height <- size
     }
 
@@ -154,69 +167,60 @@ imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angl
 
     if (!is.null(image_fun)) {
         img <- image_fun(img)
+    }    
+
+    if (angle != 0) {
+        img <- image_rotate(img, angle)
+    }
+
+    if (!is.null(colour)){
+        img <- color_image(img, colour, alpha)
     }
     
-    
-    if (is.null(colour)) {
-        grobs <- list()
-        grobs[[1]] <- rasterGrob(x = x,
-                                 y = y,
-                                 image = img,
-                                 default.units = unit,
-                                 height = height,
-                                 width = width,
-                                 interpolate = FALSE)
-    } else {
-        #cimg <- lapply(seq_along(colour), function(i) {
-        #    color_image(img, colour[i], alpha[i])
-        #})
-        
-        grobs <- lapply(seq_along(x), function(i) {
-            img <- color_image(img, colour[i], alpha[i])
-            #img <- cimg[[i]]
-            if (angle[i] != 0) {
-                img <- image_rotate(img, angle[i])
-                img <- image_transparent(img, "white")
-            }
-            rasterGrob(x = x[i],
-                       y = y[i],
-                       image = img,
-                       default.units = unit,
-                       height = height,
-                       width = width,
-                       interpolate = FALSE
-                       ## gp = gpar(rot = angle[i])
-                       ## vp = viewport(angle=angle[i])
-                       )
-        })
+    if (size == Inf){
+       grob <- rasterGrob(x = x,
+                          y = y,
+                          image = img,
+                          default.units = default.units,
+                          height = height,
+                          width = width
+                          )
+    }else{
+       grob <- rasterGrob(
+                          x = x,
+                          y = y,
+                          image = img,
+                          default.units = default.units,
+                          height = height
+                       )        
     }
-    return(grobs)
+    return(grob)
 }
 
-##' @importFrom grid makeContent
-##' @importFrom grid convertHeight
-##' @importFrom grid convertWidth
-##' @importFrom grid unit
-##' @method makeContent fixasp_raster
-##' @export
-makeContent.fixasp_raster <- function(x) {
-    ## reference https://stackoverflow.com/questions/58165226/is-it-possible-to-plot-images-in-a-ggplot2-plot-that-dont-get-distorted-when-y?noredirect=1#comment102713437_58165226
-    ## and https://github.com/GuangchuangYu/ggimage/issues/19#issuecomment-572523516
-    ## Convert from relative units to absolute units
-    children <- x$children
-    for (i in seq_along(children)) {
-        y <- children[[i]]
-        h <- convertHeight(y$height, "cm", valueOnly = TRUE)
-        w <- convertWidth(y$width, "cm", valueOnly = TRUE)
-        ## Decide how the units should be equal
-        ## y$width <- y$height <- unit(sqrt(h*w), "cm")
-
-        y$width <- unit(w, "cm")
-        y$height <- unit(h, "cm")
-        x$children[[i]] <- y
-    }
-    x
-}
+# ##' @importFrom grid makeContent
+# ##' @importFrom grid convertHeight
+# ##' @importFrom grid convertWidth
+# ##' @importFrom grid unit
+# ##' @method makeContent fixasp_raster
+# ##' @export
+# makeContent.fixasp_raster <- function(x) {
+#     ## reference https://stackoverflow.com/questions/58165226/is-it-possible-to-plot-images-in-a-ggplot2-plot-that-dont-get-distorted-when-y?noredirect=1#comment102713437_58165226
+#     ## and https://github.com/GuangchuangYu/ggimage/issues/19#issuecomment-572523516
+#     ## Convert from relative units to absolute units
+#     children <- x$children
+#     for (i in seq_along(children)) {
+#         y <- children[[i]]
+#         h <- convertHeight(y$height, "cm", valueOnly = TRUE)
+#         w <- convertWidth(y$width, "cm", valueOnly = TRUE)
+#         ## Decide how the units should be equal
+#         ## y$width <- y$height <- unit(sqrt(h*w), "cm")
+# 
+#         y$width <- unit(w, "cm")
+#         y$height <- unit(h, "cm")
+#         x$children[[i]] <- y
+#     }
+#     x
+# }
 
 ##' @importFrom magick image_info
 getAR2 <- function(magick_image) {
