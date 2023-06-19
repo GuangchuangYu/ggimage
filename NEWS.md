@@ -1,5 +1,10 @@
-## ggimage 0.3.1.002
+## ggimage 0.3.3
 
++ now the image will not be distorted when both width and height are specified. (2023-06-19, Mon, #47)
+
+## ggimage 0.3.2
+
++ support new api of phylopic database and fix the issue of gray colorspace (2023-04-02, Sun, #45, #46)
 + introduce 'filename' parameter in `ggpreview()` (2022-12-02, Fri)
 + `ggpreview()` works with `last_plot()` 
 + `ggpreview()` to preview a plot if it was saved to a file (2022-12-01, Thu)
